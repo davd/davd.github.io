@@ -1,0 +1,3618 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>reveal.js</title>
+    <style> html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+
+    article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section {
+        display: block;
+    }</style>
+    <style> html {
+        width: 100%;
+        height: 100%;
+        height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
+        overflow: hidden;
+    }
+
+    body {
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        line-height: 1;
+        margin: 0;
+        background-color: #fff;
+        color: #000;
+    }
+
+    .reveal .slides section .fragment {
+        opacity: 0;
+        visibility: hidden;
+        transition: all .2s ease;
+    }
+
+    .reveal .slides section .fragment.visible {
+        opacity: 1;
+        visibility: inherit;
+    }
+
+    .reveal .slides section .fragment.grow {
+        opacity: 1;
+        visibility: inherit;
+    }
+
+    .reveal .slides section .fragment.grow.visible {
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+
+    .reveal .slides section .fragment.shrink {
+        opacity: 1;
+        visibility: inherit;
+    }
+
+    .reveal .slides section .fragment.shrink.visible {
+        -webkit-transform: scale(0.7);
+        transform: scale(0.7);
+    }
+
+    .reveal .slides section .fragment.zoom-in {
+        -webkit-transform: scale(0.1);
+        transform: scale(0.1);
+    }
+
+    .reveal .slides section .fragment.zoom-in.visible {
+        -webkit-transform: none;
+        transform: none;
+    }
+
+    .reveal .slides section .fragment.fade-out {
+        opacity: 1;
+        visibility: inherit;
+    }
+
+    .reveal .slides section .fragment.fade-out.visible {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .reveal .slides section .fragment.semi-fade-out {
+        opacity: 1;
+        visibility: inherit;
+    }
+
+    .reveal .slides section .fragment.semi-fade-out.visible {
+        opacity: 0.5;
+        visibility: inherit;
+    }
+
+    .reveal .slides section .fragment.strike {
+        opacity: 1;
+        visibility: inherit;
+    }
+
+    .reveal .slides section .fragment.strike.visible {
+        text-decoration: line-through;
+    }
+
+    .reveal .slides section .fragment.fade-up {
+        -webkit-transform: translate(0, 20%);
+        transform: translate(0, 20%);
+    }
+
+    .reveal .slides section .fragment.fade-up.visible {
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    .reveal .slides section .fragment.fade-down {
+        -webkit-transform: translate(0, -20%);
+        transform: translate(0, -20%);
+    }
+
+    .reveal .slides section .fragment.fade-down.visible {
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    .reveal .slides section .fragment.fade-right {
+        -webkit-transform: translate(-20%, 0);
+        transform: translate(-20%, 0);
+    }
+
+    .reveal .slides section .fragment.fade-right.visible {
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    .reveal .slides section .fragment.fade-left {
+        -webkit-transform: translate(20%, 0);
+        transform: translate(20%, 0);
+    }
+
+    .reveal .slides section .fragment.fade-left.visible {
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+
+    .reveal .slides section .fragment.fade-in-then-out, .reveal .slides section .fragment.current-visible {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .reveal .slides section .fragment.fade-in-then-out.current-fragment, .reveal .slides section .fragment.current-visible.current-fragment {
+        opacity: 1;
+        visibility: inherit;
+    }
+
+    .reveal .slides section .fragment.fade-in-then-semi-out {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .reveal .slides section .fragment.fade-in-then-semi-out.visible {
+        opacity: 0.5;
+        visibility: inherit;
+    }
+
+    .reveal .slides section .fragment.fade-in-then-semi-out.current-fragment {
+        opacity: 1;
+        visibility: inherit;
+    }
+
+    .reveal .slides section .fragment.highlight-red, .reveal .slides section .fragment.highlight-current-red, .reveal .slides section .fragment.highlight-green, .reveal .slides section .fragment.highlight-current-green, .reveal .slides section .fragment.highlight-blue, .reveal .slides section .fragment.highlight-current-blue {
+        opacity: 1;
+        visibility: inherit;
+    }
+
+    .reveal .slides section .fragment.highlight-red.visible {
+        color: #ff2c2d;
+    }
+
+    .reveal .slides section .fragment.highlight-green.visible {
+        color: #17ff2e;
+    }
+
+    .reveal .slides section .fragment.highlight-blue.visible {
+        color: #1b91ff;
+    }
+
+    .reveal .slides section .fragment.highlight-current-red.current-fragment {
+        color: #ff2c2d;
+    }
+
+    .reveal .slides section .fragment.highlight-current-green.current-fragment {
+        color: #17ff2e;
+    }
+
+    .reveal .slides section .fragment.highlight-current-blue.current-fragment {
+        color: #1b91ff;
+    }
+
+    .reveal:after {
+        content: '';
+        font-style: italic;
+    }
+
+    .reveal iframe {
+        z-index: 1;
+    }
+
+    .reveal a {
+        position: relative;
+    }
+
+    .reveal .stretch {
+        max-width: none;
+        max-height: none;
+    }
+
+    .reveal pre.stretch code {
+        height: 100%;
+        max-height: 100%;
+        box-sizing: border-box;
+    }
+
+    @-webkit-keyframes bounce-right {
+        0%, 10%, 25%, 40%, 50% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+        20% {
+            -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+        }
+        30% {
+            -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+        }
+    }
+
+    @keyframes bounce-right {
+        0%, 10%, 25%, 40%, 50% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+        20% {
+            -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+        }
+        30% {
+            -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+        }
+    }
+
+    @-webkit-keyframes bounce-down {
+        0%, 10%, 25%, 40%, 50% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+        20% {
+            -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+        }
+        30% {
+            -webkit-transform: translateY(-5px);
+            transform: translateY(-5px);
+        }
+    }
+
+    @keyframes bounce-down {
+        0%, 10%, 25%, 40%, 50% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+        20% {
+            -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+        }
+        30% {
+            -webkit-transform: translateY(-5px);
+            transform: translateY(-5px);
+        }
+    }
+
+    .reveal .controls {
+        display: none;
+        position: absolute;
+        top: auto;
+        bottom: 12px;
+        right: 12px;
+        left: auto;
+        z-index: 1;
+        color: #000;
+        pointer-events: none;
+        font-size: 10px;
+    }
+
+    .reveal .controls button {
+        position: absolute;
+        padding: 0;
+        background-color: transparent;
+        border: 0;
+        outline: 0;
+        cursor: pointer;
+        color: currentColor;
+        -webkit-transform: scale(0.9999);
+        transform: scale(0.9999);
+        transition: color 0.2s ease, opacity 0.2s ease, -webkit-transform 0.2s ease;
+        transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+        z-index: 2;
+        pointer-events: auto;
+        font-size: inherit;
+        visibility: hidden;
+        opacity: 0;
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    .reveal .controls .controls-arrow:before, .reveal .controls .controls-arrow:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2.6em;
+        height: 0.5em;
+        border-radius: 0.25em;
+        background-color: currentColor;
+        transition: all 0.15s ease, background-color 0.8s ease;
+        -webkit-transform-origin: 0.2em 50%;
+        transform-origin: 0.2em 50%;
+        will-change: transform;
+    }
+
+    .reveal .controls .controls-arrow {
+        position: relative;
+        width: 3.6em;
+        height: 3.6em;
+    }
+
+    .reveal .controls .controls-arrow:before {
+        -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(45deg);
+        transform: translateX(0.5em) translateY(1.55em) rotate(45deg);
+    }
+
+    .reveal .controls .controls-arrow:after {
+        -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(-45deg);
+        transform: translateX(0.5em) translateY(1.55em) rotate(-45deg);
+    }
+
+    .reveal .controls .controls-arrow:hover:before {
+        -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(40deg);
+        transform: translateX(0.5em) translateY(1.55em) rotate(40deg);
+    }
+
+    .reveal .controls .controls-arrow:hover:after {
+        -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(-40deg);
+        transform: translateX(0.5em) translateY(1.55em) rotate(-40deg);
+    }
+
+    .reveal .controls .controls-arrow:active:before {
+        -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(36deg);
+        transform: translateX(0.5em) translateY(1.55em) rotate(36deg);
+    }
+
+    .reveal .controls .controls-arrow:active:after {
+        -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(-36deg);
+        transform: translateX(0.5em) translateY(1.55em) rotate(-36deg);
+    }
+
+    .reveal .controls .navigate-left {
+        right: 6.4em;
+        bottom: 3.2em;
+        -webkit-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+
+    .reveal .controls .navigate-right {
+        right: 0;
+        bottom: 3.2em;
+        -webkit-transform: translateX(10px);
+        transform: translateX(10px);
+    }
+
+    .reveal .controls .navigate-right .controls-arrow {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+
+    .reveal .controls .navigate-right.highlight {
+        -webkit-animation: bounce-right 2s 50 both ease-out;
+        animation: bounce-right 2s 50 both ease-out;
+    }
+
+    .reveal .controls .navigate-up {
+        right: 3.2em;
+        bottom: 6.4em;
+        -webkit-transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
+
+    .reveal .controls .navigate-up .controls-arrow {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+
+    .reveal .controls .navigate-down {
+        right: 3.2em;
+        bottom: 0;
+        -webkit-transform: translateY(10px);
+        transform: translateY(10px);
+    }
+
+    .reveal .controls .navigate-down .controls-arrow {
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+
+    .reveal .controls .navigate-down.highlight {
+        -webkit-animation: bounce-down 2s 50 both ease-out;
+        animation: bounce-down 2s 50 both ease-out;
+    }
+
+    .reveal .controls[data-controls-back-arrows="faded"] .navigate-left.enabled, .reveal .controls[data-controls-back-arrows="faded"] .navigate-up.enabled {
+        opacity: 0.3;
+    }
+
+    .reveal .controls[data-controls-back-arrows="faded"] .navigate-left.enabled:hover, .reveal .controls[data-controls-back-arrows="faded"] .navigate-up.enabled:hover {
+        opacity: 1;
+    }
+
+    .reveal .controls[data-controls-back-arrows="hidden"] .navigate-left.enabled, .reveal .controls[data-controls-back-arrows="hidden"] .navigate-up.enabled {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .reveal .controls .enabled {
+        visibility: visible;
+        opacity: 0.9;
+        cursor: pointer;
+        -webkit-transform: none;
+        transform: none;
+    }
+
+    .reveal .controls .enabled.fragmented {
+        opacity: 0.5;
+    }
+
+    .reveal .controls .enabled:hover, .reveal .controls .enabled.fragmented:hover {
+        opacity: 1;
+    }
+
+    .reveal[data-navigation-mode="linear"].has-horizontal-slides .navigate-up, .reveal[data-navigation-mode="linear"].has-horizontal-slides .navigate-down {
+        display: none;
+    }
+
+    .reveal[data-navigation-mode="linear"].has-horizontal-slides .navigate-left, .reveal:not(.has-vertical-slides) .controls .navigate-left {
+        bottom: 1.4em;
+        right: 5.5em;
+    }
+
+    .reveal[data-navigation-mode="linear"].has-horizontal-slides .navigate-right, .reveal:not(.has-vertical-slides) .controls .navigate-right {
+        bottom: 1.4em;
+        right: 0.5em;
+    }
+
+    .reveal:not(.has-horizontal-slides) .controls .navigate-up {
+        right: 1.4em;
+        bottom: 5em;
+    }
+
+    .reveal:not(.has-horizontal-slides) .controls .navigate-down {
+        right: 1.4em;
+        bottom: 0.5em;
+    }
+
+    .reveal.has-dark-background .controls {
+        color: #fff;
+    }
+
+    .reveal.has-light-background .controls {
+        color: #000;
+    }
+
+    .reveal.no-hover .controls .controls-arrow:hover:before, .reveal.no-hover .controls .controls-arrow:active:before {
+        -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(45deg);
+        transform: translateX(0.5em) translateY(1.55em) rotate(45deg);
+    }
+
+    .reveal.no-hover .controls .controls-arrow:hover:after, .reveal.no-hover .controls .controls-arrow:active:after {
+        -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(-45deg);
+        transform: translateX(0.5em) translateY(1.55em) rotate(-45deg);
+    }
+
+    @media screen and (min-width: 500px) {
+        .reveal .controls[data-controls-layout="edges"] {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .reveal .controls[data-controls-layout="edges"] .navigate-left, .reveal .controls[data-controls-layout="edges"] .navigate-right, .reveal .controls[data-controls-layout="edges"] .navigate-up, .reveal .controls[data-controls-layout="edges"] .navigate-down {
+            bottom: auto;
+            right: auto;
+        }
+
+        .reveal .controls[data-controls-layout="edges"] .navigate-left {
+            top: 50%;
+            left: 8px;
+            margin-top: -1.8em;
+        }
+
+        .reveal .controls[data-controls-layout="edges"] .navigate-right {
+            top: 50%;
+            right: 8px;
+            margin-top: -1.8em;
+        }
+
+        .reveal .controls[data-controls-layout="edges"] .navigate-up {
+            top: 8px;
+            left: 50%;
+            margin-left: -1.8em;
+        }
+
+        .reveal .controls[data-controls-layout="edges"] .navigate-down {
+            bottom: 8px;
+            left: 50%;
+            margin-left: -1.8em;
+        }
+    }
+
+    .reveal .progress {
+        position: absolute;
+        display: none;
+        height: 3px;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.2);
+        color: #fff;
+    }
+
+    .reveal .progress:after {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 10px;
+        width: 100%;
+        top: -10px;
+    }
+
+    .reveal .progress span {
+        display: block;
+        height: 100%;
+        width: 0px;
+        background-color: currentColor;
+        transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+    }
+
+    .reveal .slide-number {
+        position: absolute;
+        display: block;
+        right: 8px;
+        bottom: 8px;
+        z-index: 31;
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+        line-height: 1;
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.4);
+        padding: 5px;
+    }
+
+    .reveal .slide-number a {
+        color: currentColor;
+    }
+
+    .reveal .slide-number-delimiter {
+        margin: 0 3px;
+    }
+
+    .reveal {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        -ms-touch-action: pinch-zoom;
+        touch-action: pinch-zoom;
+    }
+
+    .reveal .slides {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        pointer-events: none;
+        overflow: visible;
+        z-index: 1;
+        text-align: center;
+        -webkit-perspective: 600px;
+        perspective: 600px;
+        -webkit-perspective-origin: 50% 40%;
+        perspective-origin: 50% 40%;
+    }
+
+    .reveal .slides > section {
+        -webkit-perspective: 600px;
+        perspective: 600px;
+    }
+
+    .reveal .slides > section, .reveal .slides > section > section {
+        display: none;
+        position: absolute;
+        width: 100%;
+        padding: 20px 0px;
+        pointer-events: auto;
+        z-index: 10;
+        -webkit-transform-style: flat;
+        transform-style: flat;
+        transition: -webkit-transform-origin 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), -webkit-transform 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), visibility 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), opacity 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+        transition: transform-origin 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), transform 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), visibility 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), opacity 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+    }
+
+    .reveal[data-transition-speed="fast"] .slides section {
+        transition-duration: 400ms;
+    }
+
+    .reveal[data-transition-speed="slow"] .slides section {
+        transition-duration: 1200ms;
+    }
+
+    .reveal .slides section[data-transition-speed="fast"] {
+        transition-duration: 400ms;
+    }
+
+    .reveal .slides section[data-transition-speed="slow"] {
+        transition-duration: 1200ms;
+    }
+
+    .reveal .slides > section.stack {
+        padding-top: 0;
+        padding-bottom: 0;
+        pointer-events: none;
+        height: 100%;
+    }
+
+    .reveal .slides > section.present, .reveal .slides > section > section.present {
+        display: block;
+        z-index: 11;
+        opacity: 1;
+    }
+
+    .reveal .slides > section:empty, .reveal .slides > section > section:empty, .reveal .slides > section[data-background-interactive], .reveal .slides > section > section[data-background-interactive] {
+        pointer-events: none;
+    }
+
+    .reveal.center, .reveal.center .slides, .reveal.center .slides section {
+        min-height: 0 !important;
+    }
+
+    .reveal .slides > section.future, .reveal .slides > section > section.future, .reveal .slides > section.past, .reveal .slides > section > section.past {
+        pointer-events: none;
+    }
+
+    .reveal.overview .slides > section, .reveal.overview .slides > section > section {
+        pointer-events: auto;
+    }
+
+    .reveal .slides > section.past, .reveal .slides > section.future, .reveal .slides > section > section.past, .reveal .slides > section > section.future {
+        opacity: 0;
+    }
+
+    .reveal.slide section {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .reveal .slides > section[data-transition=slide].past, .reveal .slides > section[data-transition~=slide-out].past, .reveal.slide .slides > section:not([data-transition]).past {
+        -webkit-transform: translate(-150%, 0);
+        transform: translate(-150%, 0);
+    }
+
+    .reveal .slides > section[data-transition=slide].future, .reveal .slides > section[data-transition~=slide-in].future, .reveal.slide .slides > section:not([data-transition]).future {
+        -webkit-transform: translate(150%, 0);
+        transform: translate(150%, 0);
+    }
+
+    .reveal .slides > section > section[data-transition=slide].past, .reveal .slides > section > section[data-transition~=slide-out].past, .reveal.slide .slides > section > section:not([data-transition]).past {
+        -webkit-transform: translate(0, -150%);
+        transform: translate(0, -150%);
+    }
+
+    .reveal .slides > section > section[data-transition=slide].future, .reveal .slides > section > section[data-transition~=slide-in].future, .reveal.slide .slides > section > section:not([data-transition]).future {
+        -webkit-transform: translate(0, 150%);
+        transform: translate(0, 150%);
+    }
+
+    .reveal.linear section {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .reveal .slides > section[data-transition=linear].past, .reveal .slides > section[data-transition~=linear-out].past, .reveal.linear .slides > section:not([data-transition]).past {
+        -webkit-transform: translate(-150%, 0);
+        transform: translate(-150%, 0);
+    }
+
+    .reveal .slides > section[data-transition=linear].future, .reveal .slides > section[data-transition~=linear-in].future, .reveal.linear .slides > section:not([data-transition]).future {
+        -webkit-transform: translate(150%, 0);
+        transform: translate(150%, 0);
+    }
+
+    .reveal .slides > section > section[data-transition=linear].past, .reveal .slides > section > section[data-transition~=linear-out].past, .reveal.linear .slides > section > section:not([data-transition]).past {
+        -webkit-transform: translate(0, -150%);
+        transform: translate(0, -150%);
+    }
+
+    .reveal .slides > section > section[data-transition=linear].future, .reveal .slides > section > section[data-transition~=linear-in].future, .reveal.linear .slides > section > section:not([data-transition]).future {
+        -webkit-transform: translate(0, 150%);
+        transform: translate(0, 150%);
+    }
+
+    .reveal .slides section[data-transition=default].stack, .reveal.default .slides section.stack {
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+    .reveal .slides > section[data-transition=default].past, .reveal .slides > section[data-transition~=default-out].past, .reveal.default .slides > section:not([data-transition]).past {
+        -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+    }
+
+    .reveal .slides > section[data-transition=default].future, .reveal .slides > section[data-transition~=default-in].future, .reveal.default .slides > section:not([data-transition]).future {
+        -webkit-transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+    }
+
+    .reveal .slides > section > section[data-transition=default].past, .reveal .slides > section > section[data-transition~=default-out].past, .reveal.default .slides > section > section:not([data-transition]).past {
+        -webkit-transform: translate3d(0, -300px, 0) rotateX(70deg) translate3d(0, -300px, 0);
+        transform: translate3d(0, -300px, 0) rotateX(70deg) translate3d(0, -300px, 0);
+    }
+
+    .reveal .slides > section > section[data-transition=default].future, .reveal .slides > section > section[data-transition~=default-in].future, .reveal.default .slides > section > section:not([data-transition]).future {
+        -webkit-transform: translate3d(0, 300px, 0) rotateX(-70deg) translate3d(0, 300px, 0);
+        transform: translate3d(0, 300px, 0) rotateX(-70deg) translate3d(0, 300px, 0);
+    }
+
+    .reveal .slides section[data-transition=convex].stack, .reveal.convex .slides section.stack {
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+    .reveal .slides > section[data-transition=convex].past, .reveal .slides > section[data-transition~=convex-out].past, .reveal.convex .slides > section:not([data-transition]).past {
+        -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+    }
+
+    .reveal .slides > section[data-transition=convex].future, .reveal .slides > section[data-transition~=convex-in].future, .reveal.convex .slides > section:not([data-transition]).future {
+        -webkit-transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+    }
+
+    .reveal .slides > section > section[data-transition=convex].past, .reveal .slides > section > section[data-transition~=convex-out].past, .reveal.convex .slides > section > section:not([data-transition]).past {
+        -webkit-transform: translate3d(0, -300px, 0) rotateX(70deg) translate3d(0, -300px, 0);
+        transform: translate3d(0, -300px, 0) rotateX(70deg) translate3d(0, -300px, 0);
+    }
+
+    .reveal .slides > section > section[data-transition=convex].future, .reveal .slides > section > section[data-transition~=convex-in].future, .reveal.convex .slides > section > section:not([data-transition]).future {
+        -webkit-transform: translate3d(0, 300px, 0) rotateX(-70deg) translate3d(0, 300px, 0);
+        transform: translate3d(0, 300px, 0) rotateX(-70deg) translate3d(0, 300px, 0);
+    }
+
+    .reveal .slides section[data-transition=concave].stack, .reveal.concave .slides section.stack {
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+    .reveal .slides > section[data-transition=concave].past, .reveal .slides > section[data-transition~=concave-out].past, .reveal.concave .slides > section:not([data-transition]).past {
+        -webkit-transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0);
+    }
+
+    .reveal .slides > section[data-transition=concave].future, .reveal .slides > section[data-transition~=concave-in].future, .reveal.concave .slides > section:not([data-transition]).future {
+        -webkit-transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0);
+    }
+
+    .reveal .slides > section > section[data-transition=concave].past, .reveal .slides > section > section[data-transition~=concave-out].past, .reveal.concave .slides > section > section:not([data-transition]).past {
+        -webkit-transform: translate3d(0, -80%, 0) rotateX(-70deg) translate3d(0, -80%, 0);
+        transform: translate3d(0, -80%, 0) rotateX(-70deg) translate3d(0, -80%, 0);
+    }
+
+    .reveal .slides > section > section[data-transition=concave].future, .reveal .slides > section > section[data-transition~=concave-in].future, .reveal.concave .slides > section > section:not([data-transition]).future {
+        -webkit-transform: translate3d(0, 80%, 0) rotateX(70deg) translate3d(0, 80%, 0);
+        transform: translate3d(0, 80%, 0) rotateX(70deg) translate3d(0, 80%, 0);
+    }
+
+    .reveal .slides section[data-transition=zoom], .reveal.zoom .slides section:not([data-transition]) {
+        transition-timing-function: ease;
+    }
+
+    .reveal .slides > section[data-transition=zoom].past, .reveal .slides > section[data-transition~=zoom-out].past, .reveal.zoom .slides > section:not([data-transition]).past {
+        visibility: hidden;
+        -webkit-transform: scale(16);
+        transform: scale(16);
+    }
+
+    .reveal .slides > section[data-transition=zoom].future, .reveal .slides > section[data-transition~=zoom-in].future, .reveal.zoom .slides > section:not([data-transition]).future {
+        visibility: hidden;
+        -webkit-transform: scale(0.2);
+        transform: scale(0.2);
+    }
+
+    .reveal .slides > section > section[data-transition=zoom].past, .reveal .slides > section > section[data-transition~=zoom-out].past, .reveal.zoom .slides > section > section:not([data-transition]).past {
+        -webkit-transform: scale(16);
+        transform: scale(16);
+    }
+
+    .reveal .slides > section > section[data-transition=zoom].future, .reveal .slides > section > section[data-transition~=zoom-in].future, .reveal.zoom .slides > section > section:not([data-transition]).future {
+        -webkit-transform: scale(0.2);
+        transform: scale(0.2);
+    }
+
+    .reveal.cube .slides {
+        -webkit-perspective: 1300px;
+        perspective: 1300px;
+    }
+
+    .reveal.cube .slides section {
+        padding: 30px;
+        min-height: 700px;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        box-sizing: border-box;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+    .reveal.center.cube .slides section {
+        min-height: 0;
+    }
+
+    .reveal.cube .slides section:not(.stack):before {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        -webkit-transform: translateZ(-20px);
+        transform: translateZ(-20px);
+    }
+
+    .reveal.cube .slides section:not(.stack):after {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 90%;
+        height: 30px;
+        left: 5%;
+        bottom: 0;
+        background: none;
+        z-index: 1;
+        border-radius: 4px;
+        box-shadow: 0px 95px 25px rgba(0, 0, 0, 0.2);
+        -webkit-transform: translateZ(-90px) rotateX(65deg);
+        transform: translateZ(-90px) rotateX(65deg);
+    }
+
+    .reveal.cube .slides > section.stack {
+        padding: 0;
+        background: none;
+    }
+
+    .reveal.cube .slides > section.past {
+        -webkit-transform-origin: 100% 0%;
+        transform-origin: 100% 0%;
+        -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg);
+        transform: translate3d(-100%, 0, 0) rotateY(-90deg);
+    }
+
+    .reveal.cube .slides > section.future {
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
+        -webkit-transform: translate3d(100%, 0, 0) rotateY(90deg);
+        transform: translate3d(100%, 0, 0) rotateY(90deg);
+    }
+
+    .reveal.cube .slides > section > section.past {
+        -webkit-transform-origin: 0% 100%;
+        transform-origin: 0% 100%;
+        -webkit-transform: translate3d(0, -100%, 0) rotateX(90deg);
+        transform: translate3d(0, -100%, 0) rotateX(90deg);
+    }
+
+    .reveal.cube .slides > section > section.future {
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
+        -webkit-transform: translate3d(0, 100%, 0) rotateX(-90deg);
+        transform: translate3d(0, 100%, 0) rotateX(-90deg);
+    }
+
+    .reveal.page .slides {
+        -webkit-perspective-origin: 0% 50%;
+        perspective-origin: 0% 50%;
+        -webkit-perspective: 3000px;
+        perspective: 3000px;
+    }
+
+    .reveal.page .slides section {
+        padding: 30px;
+        min-height: 700px;
+        box-sizing: border-box;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+    .reveal.page .slides section.past {
+        z-index: 12;
+    }
+
+    .reveal.page .slides section:not(.stack):before {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: rgba(0, 0, 0, 0.1);
+        -webkit-transform: translateZ(-20px);
+        transform: translateZ(-20px);
+    }
+
+    .reveal.page .slides section:not(.stack):after {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 90%;
+        height: 30px;
+        left: 5%;
+        bottom: 0;
+        background: none;
+        z-index: 1;
+        border-radius: 4px;
+        box-shadow: 0px 95px 25px rgba(0, 0, 0, 0.2);
+        -webkit-transform: translateZ(-90px) rotateX(65deg);
+    }
+
+    .reveal.page .slides > section.stack {
+        padding: 0;
+        background: none;
+    }
+
+    .reveal.page .slides > section.past {
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
+        -webkit-transform: translate3d(-40%, 0, 0) rotateY(-80deg);
+        transform: translate3d(-40%, 0, 0) rotateY(-80deg);
+    }
+
+    .reveal.page .slides > section.future {
+        -webkit-transform-origin: 100% 0%;
+        transform-origin: 100% 0%;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    .reveal.page .slides > section > section.past {
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
+        -webkit-transform: translate3d(0, -40%, 0) rotateX(80deg);
+        transform: translate3d(0, -40%, 0) rotateX(80deg);
+    }
+
+    .reveal.page .slides > section > section.future {
+        -webkit-transform-origin: 0% 100%;
+        transform-origin: 0% 100%;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    .reveal .slides section[data-transition=fade], .reveal.fade .slides section:not([data-transition]), .reveal.fade .slides > section > section:not([data-transition]) {
+        -webkit-transform: none;
+        transform: none;
+        transition: opacity 0.5s;
+    }
+
+    .reveal.fade.overview .slides section, .reveal.fade.overview .slides > section > section {
+        transition: none;
+    }
+
+    .reveal .slides section[data-transition=none], .reveal.none .slides section:not([data-transition]) {
+        -webkit-transform: none;
+        transform: none;
+        transition: none;
+    }
+
+    .reveal .pause-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        visibility: hidden;
+        opacity: 0;
+        z-index: 100;
+        transition: all 1s ease;
+    }
+
+    .reveal .pause-overlay .resume-button {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        color: #ccc;
+        border-radius: 2px;
+        padding: 6px 14px;
+        border: 2px solid #ccc;
+        font-size: 16px;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .reveal .pause-overlay .resume-button:hover {
+        color: #fff;
+        border-color: #fff;
+    }
+
+    .reveal.paused .pause-overlay {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .no-transforms {
+        overflow-y: auto;
+    }
+
+    .no-transforms .reveal {
+        overflow: visible;
+    }
+
+    .no-transforms .reveal .slides {
+        position: relative;
+        width: 80%;
+        max-width: 1280px;
+        height: auto;
+        top: 0;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .no-transforms .reveal .controls, .no-transforms .reveal .progress {
+        display: none;
+    }
+
+    .no-transforms .reveal .slides section {
+        display: block;
+        opacity: 1;
+        position: relative;
+        height: auto;
+        min-height: 0;
+        top: 0;
+        left: 0;
+        margin: 10vh 0;
+        margin: 70px 0;
+        -webkit-transform: none;
+        transform: none;
+    }
+
+    .reveal .no-transition, .reveal .no-transition * {
+        transition: none !important;
+    }
+
+    .reveal .backgrounds {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        -webkit-perspective: 600px;
+        perspective: 600px;
+    }
+
+    .reveal .slide-background {
+        display: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        visibility: hidden;
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0);
+        transition: all 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+    }
+
+    .reveal .slide-background-content {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .reveal .slide-background.stack {
+        display: block;
+    }
+
+    .reveal .slide-background.present {
+        opacity: 1;
+        visibility: visible;
+        z-index: 2;
+    }
+
+    .print-pdf .reveal .slide-background {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    .reveal .slide-background video {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        max-height: none;
+        top: 0;
+        left: 0;
+        -o-object-fit: cover;
+        object-fit: cover;
+    }
+
+    .reveal .slide-background[data-background-size="contain"] video {
+        -o-object-fit: contain;
+        object-fit: contain;
+    }
+
+    .reveal[data-background-transition=none] > .backgrounds .slide-background, .reveal > .backgrounds .slide-background[data-background-transition=none] {
+        transition: none;
+    }
+
+    .reveal[data-background-transition=slide] > .backgrounds .slide-background, .reveal > .backgrounds .slide-background[data-background-transition=slide] {
+        opacity: 1;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .reveal[data-background-transition=slide] > .backgrounds .slide-background.past, .reveal > .backgrounds .slide-background.past[data-background-transition=slide] {
+        -webkit-transform: translate(-100%, 0);
+        transform: translate(-100%, 0);
+    }
+
+    .reveal[data-background-transition=slide] > .backgrounds .slide-background.future, .reveal > .backgrounds .slide-background.future[data-background-transition=slide] {
+        -webkit-transform: translate(100%, 0);
+        transform: translate(100%, 0);
+    }
+
+    .reveal[data-background-transition=slide] > .backgrounds .slide-background > .slide-background.past, .reveal > .backgrounds .slide-background > .slide-background.past[data-background-transition=slide] {
+        -webkit-transform: translate(0, -100%);
+        transform: translate(0, -100%);
+    }
+
+    .reveal[data-background-transition=slide] > .backgrounds .slide-background > .slide-background.future, .reveal > .backgrounds .slide-background > .slide-background.future[data-background-transition=slide] {
+        -webkit-transform: translate(0, 100%);
+        transform: translate(0, 100%);
+    }
+
+    .reveal[data-background-transition=convex] > .backgrounds .slide-background.past, .reveal > .backgrounds .slide-background.past[data-background-transition=convex] {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+    }
+
+    .reveal[data-background-transition=convex] > .backgrounds .slide-background.future, .reveal > .backgrounds .slide-background.future[data-background-transition=convex] {
+        opacity: 0;
+        -webkit-transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+    }
+
+    .reveal[data-background-transition=convex] > .backgrounds .slide-background > .slide-background.past, .reveal > .backgrounds .slide-background > .slide-background.past[data-background-transition=convex] {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0) rotateX(90deg) translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0) rotateX(90deg) translate3d(0, -100%, 0);
+    }
+
+    .reveal[data-background-transition=convex] > .backgrounds .slide-background > .slide-background.future, .reveal > .backgrounds .slide-background > .slide-background.future[data-background-transition=convex] {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0) rotateX(-90deg) translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0) rotateX(-90deg) translate3d(0, 100%, 0);
+    }
+
+    .reveal[data-background-transition=concave] > .backgrounds .slide-background.past, .reveal > .backgrounds .slide-background.past[data-background-transition=concave] {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0);
+    }
+
+    .reveal[data-background-transition=concave] > .backgrounds .slide-background.future, .reveal > .backgrounds .slide-background.future[data-background-transition=concave] {
+        opacity: 0;
+        -webkit-transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0);
+    }
+
+    .reveal[data-background-transition=concave] > .backgrounds .slide-background > .slide-background.past, .reveal > .backgrounds .slide-background > .slide-background.past[data-background-transition=concave] {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0) rotateX(-90deg) translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0) rotateX(-90deg) translate3d(0, -100%, 0);
+    }
+
+    .reveal[data-background-transition=concave] > .backgrounds .slide-background > .slide-background.future, .reveal > .backgrounds .slide-background > .slide-background.future[data-background-transition=concave] {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0) rotateX(90deg) translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0) rotateX(90deg) translate3d(0, 100%, 0);
+    }
+
+    .reveal[data-background-transition=zoom] > .backgrounds .slide-background, .reveal > .backgrounds .slide-background[data-background-transition=zoom] {
+        transition-timing-function: ease;
+    }
+
+    .reveal[data-background-transition=zoom] > .backgrounds .slide-background.past, .reveal > .backgrounds .slide-background.past[data-background-transition=zoom] {
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transform: scale(16);
+        transform: scale(16);
+    }
+
+    .reveal[data-background-transition=zoom] > .backgrounds .slide-background.future, .reveal > .backgrounds .slide-background.future[data-background-transition=zoom] {
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transform: scale(0.2);
+        transform: scale(0.2);
+    }
+
+    .reveal[data-background-transition=zoom] > .backgrounds .slide-background > .slide-background.past, .reveal > .backgrounds .slide-background > .slide-background.past[data-background-transition=zoom] {
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transform: scale(16);
+        transform: scale(16);
+    }
+
+    .reveal[data-background-transition=zoom] > .backgrounds .slide-background > .slide-background.future, .reveal > .backgrounds .slide-background > .slide-background.future[data-background-transition=zoom] {
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transform: scale(0.2);
+        transform: scale(0.2);
+    }
+
+    .reveal[data-transition-speed="fast"] > .backgrounds .slide-background {
+        transition-duration: 400ms;
+    }
+
+    .reveal[data-transition-speed="slow"] > .backgrounds .slide-background {
+        transition-duration: 1200ms;
+    }
+
+    .reveal.overview {
+        -webkit-perspective-origin: 50% 50%;
+        perspective-origin: 50% 50%;
+        -webkit-perspective: 700px;
+        perspective: 700px;
+    }
+
+    .reveal.overview .slides {
+        -moz-transform-style: preserve-3d;
+    }
+
+    .reveal.overview .slides section {
+        height: 100%;
+        top: 0 !important;
+        opacity: 1 !important;
+        overflow: hidden;
+        visibility: visible !important;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .reveal.overview .slides section:hover, .reveal.overview .slides section.present {
+        outline: 10px solid rgba(150, 150, 150, 0.4);
+        outline-offset: 10px;
+    }
+
+    .reveal.overview .slides section .fragment {
+        opacity: 1;
+        transition: none;
+    }
+
+    .reveal.overview .slides section:after, .reveal.overview .slides section:before {
+        display: none !important;
+    }
+
+    .reveal.overview .slides > section.stack {
+        padding: 0;
+        top: 0 !important;
+        background: none;
+        outline: none;
+        overflow: visible;
+    }
+
+    .reveal.overview .backgrounds {
+        -webkit-perspective: inherit;
+        perspective: inherit;
+        -moz-transform-style: preserve-3d;
+    }
+
+    .reveal.overview .backgrounds .slide-background {
+        opacity: 1;
+        visibility: visible;
+        outline: 10px solid rgba(150, 150, 150, 0.1);
+        outline-offset: 10px;
+    }
+
+    .reveal.overview .backgrounds .slide-background.stack {
+        overflow: visible;
+    }
+
+    .reveal.overview .slides section, .reveal.overview-deactivating .slides section {
+        transition: none;
+    }
+
+    .reveal.overview .backgrounds .slide-background, .reveal.overview-deactivating .backgrounds .slide-background {
+        transition: none;
+    }
+
+    .reveal.rtl .slides, .reveal.rtl .slides h1, .reveal.rtl .slides h2, .reveal.rtl .slides h3, .reveal.rtl .slides h4, .reveal.rtl .slides h5, .reveal.rtl .slides h6 {
+        direction: rtl;
+        font-family: sans-serif;
+    }
+
+    .reveal.rtl pre, .reveal.rtl code {
+        direction: ltr;
+    }
+
+    .reveal.rtl ol, .reveal.rtl ul {
+        text-align: right;
+    }
+
+    .reveal.rtl .progress span {
+        float: right;
+    }
+
+    .reveal.has-parallax-background .backgrounds {
+        transition: all 0.8s ease;
+    }
+
+    .reveal.has-parallax-background[data-transition-speed="fast"] .backgrounds {
+        transition-duration: 400ms;
+    }
+
+    .reveal.has-parallax-background[data-transition-speed="slow"] .backgrounds {
+        transition-duration: 1200ms;
+    }
+
+    .reveal > .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.9);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .reveal > .overlay.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .reveal > .overlay .spinner {
+        position: absolute;
+        display: block;
+        top: 50%;
+        left: 50%;
+        width: 32px;
+        height: 32px;
+        margin: -16px 0 0 -16px;
+        z-index: 10;
+        background-image: url(data:image/gif;base64,R0lGODlhIAAgAPMAAJmZmf%2F%2F%2F6%2Bvr8nJybW1tcDAwOjo6Nvb26ioqKOjo7Ozs%2FLy8vz8%2FAAAAAAAAAAAACH%2FC05FVFNDQVBFMi4wAwEAAAAh%2FhpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh%2BQQJCgAAACwAAAAAIAAgAAAE5xDISWlhperN52JLhSSdRgwVo1ICQZRUsiwHpTJT4iowNS8vyW2icCF6k8HMMBkCEDskxTBDAZwuAkkqIfxIQyhBQBFvAQSDITM5VDW6XNE4KagNh6Bgwe60smQUB3d4Rz1ZBApnFASDd0hihh12BkE9kjAJVlycXIg7CQIFA6SlnJ87paqbSKiKoqusnbMdmDC2tXQlkUhziYtyWTxIfy6BE8WJt5YJvpJivxNaGmLHT0VnOgSYf0dZXS7APdpB309RnHOG5gDqXGLDaC457D1zZ%2FV%2FnmOM82XiHRLYKhKP1oZmADdEAAAh%2BQQJCgAAACwAAAAAIAAgAAAE6hDISWlZpOrNp1lGNRSdRpDUolIGw5RUYhhHukqFu8DsrEyqnWThGvAmhVlteBvojpTDDBUEIFwMFBRAmBkSgOrBFZogCASwBDEY%2FCZSg7GSE0gSCjQBMVG023xWBhklAnoEdhQEfyNqMIcKjhRsjEdnezB%2BA4k8gTwJhFuiW4dokXiloUepBAp5qaKpp6%2BHo7aWW54wl7obvEe0kRuoplCGepwSx2jJvqHEmGt6whJpGpfJCHmOoNHKaHx61WiSR92E4lbFoq%2BB6QDtuetcaBPnW6%2BO7wDHpIiK9SaVK5GgV543tzjgGcghAgAh%2BQQJCgAAACwAAAAAIAAgAAAE7hDISSkxpOrN5zFHNWRdhSiVoVLHspRUMoyUakyEe8PTPCATW9A14E0UvuAKMNAZKYUZCiBMuBakSQKG8G2FzUWox2AUtAQFcBKlVQoLgQReZhQlCIJesQXI5B0CBnUMOxMCenoCfTCEWBsJColTMANldx15BGs8B5wlCZ9Po6OJkwmRpnqkqnuSrayqfKmqpLajoiW5HJq7FL1Gr2mMMcKUMIiJgIemy7xZtJsTmsM4xHiKv5KMCXqfyUCJEonXPN2rAOIAmsfB3uPoAK%2B%2BG%2Bw48edZPK%2BM6hLJpQg484enXIdQFSS1u6UhksENEQAAIfkECQoAAAAsAAAAACAAIAAABOcQyEmpGKLqzWcZRVUQnZYg1aBSh2GUVEIQ2aQOE%2BG%2BcD4ntpWkZQj1JIiZIogDFFyHI0UxQwFugMSOFIPJftfVAEoZLBbcLEFhlQiqGp1Vd140AUklUN3eCA51C1EWMzMCezCBBmkxVIVHBWd3HHl9JQOIJSdSnJ0TDKChCwUJjoWMPaGqDKannasMo6WnM562R5YluZRwur0wpgqZE7NKUm%2BFNRPIhjBJxKZteWuIBMN4zRMIVIhffcgojwCF117i4nlLnY5ztRLsnOk%2BaV%2BoJY7V7m76PdkS4trKcdg0Zc0tTcKkRAAAIfkECQoAAAAsAAAAACAAIAAABO4QyEkpKqjqzScpRaVkXZWQEximw1BSCUEIlDohrft6cpKCk5xid5MNJTaAIkekKGQkWyKHkvhKsR7ARmitkAYDYRIbUQRQjWBwJRzChi9CRlBcY1UN4g0%2FVNB0AlcvcAYHRyZPdEQFYV8ccwR5HWxEJ02YmRMLnJ1xCYp0Y5idpQuhopmmC2KgojKasUQDk5BNAwwMOh2RtRq5uQuPZKGIJQIGwAwGf6I0JXMpC8C7kXWDBINFMxS4DKMAWVWAGYsAdNqW5uaRxkSKJOZKaU3tPOBZ4DuK2LATgJhkPJMgTwKCdFjyPHEnKxFCDhEAACH5BAkKAAAALAAAAAAgACAAAATzEMhJaVKp6s2nIkolIJ2WkBShpkVRWqqQrhLSEu9MZJKK9y1ZrqYK9WiClmvoUaF8gIQSNeF1Er4MNFn4SRSDARWroAIETg1iVwuHjYB1kYc1mwruwXKC9gmsJXliGxc%2BXiUCby9ydh1sOSdMkpMTBpaXBzsfhoc5l58Gm5yToAaZhaOUqjkDgCWNHAULCwOLaTmzswadEqggQwgHuQsHIoZCHQMMQgQGubVEcxOPFAcMDAYUA85eWARmfSRQCdcMe0zeP1AAygwLlJtPNAAL19DARdPzBOWSm1brJBi45soRAWQAAkrQIykShQ9wVhHCwCQCACH5BAkKAAAALAAAAAAgACAAAATrEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiRMDjI0Fd30%2FiI2UA5GSS5UDj2l6NoqgOgN4gksEBgYFf0FDqKgHnyZ9OX8HrgYHdHpcHQULXAS2qKpENRg7eAMLC7kTBaixUYFkKAzWAAnLC7FLVxLWDBLKCwaKTULgEwbLA4hJtOkSBNqITT3xEgfLpBtzE%2FjiuL04RGEBgwWhShRgQExHBAAh%2BQQJCgAAACwAAAAAIAAgAAAE7xDISWlSqerNpyJKhWRdlSAVoVLCWk6JKlAqAavhO9UkUHsqlE6CwO1cRdCQ8iEIfzFVTzLdRAmZX3I2SfZiCqGk5dTESJeaOAlClzsJsqwiJwiqnFrb2nS9kmIcgEsjQydLiIlHehhpejaIjzh9eomSjZR%2BipslWIRLAgMDOR2DOqKogTB9pCUJBagDBXR6XB0EBkIIsaRsGGMMAxoDBgYHTKJiUYEGDAzHC9EACcUGkIgFzgwZ0QsSBcXHiQvOwgDdEwfFs0sDzt4S6BK4xYjkDOzn0unFeBzOBijIm1Dgmg5YFQwsCMjp1oJ8LyIAACH5BAkKAAAALAAAAAAgACAAAATwEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiUd6GGl6NoiPOH16iZKNlH6KmyWFOggHhEEvAwwMA0N9GBsEC6amhnVcEwavDAazGwIDaH1ipaYLBUTCGgQDA8NdHz0FpqgTBwsLqAbWAAnIA4FWKdMLGdYGEgraigbT0OITBcg5QwPT4xLrROZL6AuQAPUS7bxLpoWidY0JtxLHKhwwMJBTHgPKdEQAACH5BAkKAAAALAAAAAAgACAAAATrEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiUd6GAULDJCRiXo1CpGXDJOUjY%2BYip9DhToJA4RBLwMLCwVDfRgbBAaqqoZ1XBMHswsHtxtFaH1iqaoGNgAIxRpbFAgfPQSqpbgGBqUD1wBXeCYp1AYZ19JJOYgH1KwA4UBvQwXUBxPqVD9L3sbp2BNk2xvvFPJd%2BMFCN6HAAIKgNggY0KtEBAAh%2BQQJCgAAACwAAAAAIAAgAAAE6BDISWlSqerNpyJKhWRdlSAVoVLCWk6JKlAqAavhO9UkUHsqlE6CwO1cRdCQ8iEIfzFVTzLdRAmZX3I2SfYIDMaAFdTESJeaEDAIMxYFqrOUaNW4E4ObYcCXaiBVEgULe0NJaxxtYksjh2NLkZISgDgJhHthkpU4mW6blRiYmZOlh4JWkDqILwUGBnE6TYEbCgevr0N1gH4At7gHiRpFaLNrrq8HNgAJA70AWxQIH1%2BvsYMDAzZQPC9VCNkDWUhGkuE5PxJNwiUK4UfLzOlD4WvzAHaoG9nxPi5d%2BjYUqfAhhykOFwJWiAAAIfkECQoAAAAsAAAAACAAIAAABPAQyElpUqnqzaciSoVkXVUMFaFSwlpOCcMYlErAavhOMnNLNo8KsZsMZItJEIDIFSkLGQoQTNhIsFehRww2CQLKF0tYGKYSg%2BygsZIuNqJksKgbfgIGepNo2cIUB3V1B3IvNiBYNQaDSTtfhhx0CwVPI0UJe0%2Bbm4g5VgcGoqOcnjmjqDSdnhgEoamcsZuXO1aWQy8KAwOAuTYYGwi7w5h%2BKr0SJ8MFihpNbx%2B4Erq7BYBuzsdiH1jCAzoSfl0rVirNbRXlBBlLX%2BBP0XJLAPGzTkAuAOqb0WT5AH7OcdCm5B8TgRwSRKIHQtaLCwg1RAAAOwAAAAAAAAAAAA%3D%3D);
+        visibility: visible;
+        opacity: 0.6;
+        transition: all 0.3s ease;
+    }
+
+    .reveal > .overlay header {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 40px;
+        z-index: 2;
+        border-bottom: 1px solid #222;
+    }
+
+    .reveal > .overlay header a {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 36px;
+        padding: 0 10px;
+        float: right;
+        opacity: 0.6;
+        box-sizing: border-box;
+    }
+
+    .reveal > .overlay header a:hover {
+        opacity: 1;
+    }
+
+    .reveal > .overlay header a .icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-position: 50% 50%;
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+
+    .reveal > .overlay header a.close .icon {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABkklEQVRYR8WX4VHDMAxG6wnoJrABZQPYBCaBTWAD2g1gE5gg6OOsXuxIlr40d81dfrSJ9V4c2VLK7spHuTJ/5wpM07QXuXc5X0opX2tEJcadjHuV80li/FgxTIEK/5QBCICBD6xEhSMGHgQPgBgLiYVAB1dpSqKDawxTohFw4JSEA3clzgIBPCURwE2JucBR7rhPJJv5OpJwDX+SfDjgx1wACQeJG1aChP9K/IMmdZ8DtESV1WyP3Bt4MwM6sj4NMxMYiqUWHQu4KYA/SYkIjOsm3BXYWMKFDwU2khjCQ4ELJUJ4SmClRArOCmSXGuKma0fYD5CbzHxFpCSGAhfAVSSUGDUk2BWZaff2g6GE15BsBQ9nwmpIGDiyHQddwNTMKkbZaf9fajXQca1EX44puJZUsnY0ObGmITE3GVLCbEhQUjGVt146j6oasWN+49Vph2w1pZ5EansNZqKBm1txbU57iRRcZ86RWMDdWtBJUHBHwoQPi1GV+JCbntmvok7iTX4/Up9mgyTc/FJYDTcndgH/AA5A/CHsyEkVAAAAAElFTkSuQmCC);
+    }
+
+    .reveal > .overlay header a.external .icon {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAcElEQVRYR+2WSQoAIQwEzf8f7XiOMkUQxUPlGkM3hVmiQfQR9GYnH1SsAQlI4DiBqkCMoNb9y2e90IAEJPAcgdznU9+engMaeJ7Azh5Y1U67gAho4DqBqmB1buAf0MB1AlVBek83ZPkmJMGc1wAR+AAqod/B97TRpQAAAABJRU5ErkJggg==);
+    }
+
+    .reveal > .overlay .viewport {
+        position: absolute;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        top: 40px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .reveal > .overlay.overlay-preview .viewport iframe {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        border: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .reveal > .overlay.overlay-preview.loaded .viewport iframe {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .reveal > .overlay.overlay-preview.loaded .viewport-inner {
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        top: 45%;
+        width: 100%;
+        text-align: center;
+        letter-spacing: normal;
+    }
+
+    .reveal > .overlay.overlay-preview .x-frame-error {
+        opacity: 0;
+        transition: opacity 0.3s ease 0.3s;
+    }
+
+    .reveal > .overlay.overlay-preview.loaded .x-frame-error {
+        opacity: 1;
+    }
+
+    .reveal > .overlay.overlay-preview.loaded .spinner {
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transform: scale(0.2);
+        transform: scale(0.2);
+    }
+
+    .reveal > .overlay.overlay-help .viewport {
+        overflow: auto;
+        color: #fff;
+    }
+
+    .reveal > .overlay.overlay-help .viewport .viewport-inner {
+        width: 600px;
+        margin: auto;
+        padding: 20px 20px 80px 20px;
+        text-align: center;
+        letter-spacing: normal;
+    }
+
+    .reveal > .overlay.overlay-help .viewport .viewport-inner .title {
+        font-size: 20px;
+    }
+
+    .reveal > .overlay.overlay-help .viewport .viewport-inner table {
+        border: 1px solid #fff;
+        border-collapse: collapse;
+        font-size: 16px;
+    }
+
+    .reveal > .overlay.overlay-help .viewport .viewport-inner table th, .reveal > .overlay.overlay-help .viewport .viewport-inner table td {
+        width: 200px;
+        padding: 14px;
+        border: 1px solid #fff;
+        vertical-align: middle;
+    }
+
+    .reveal > .overlay.overlay-help .viewport .viewport-inner table th {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .reveal .playback {
+        position: absolute;
+        left: 15px;
+        bottom: 20px;
+        z-index: 30;
+        cursor: pointer;
+        transition: all 400ms ease;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    .reveal.overview .playback {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .reveal .hljs table {
+        margin: initial;
+    }
+
+    .reveal .hljs-ln-code, .reveal .hljs-ln-numbers {
+        padding: 0;
+        border: 0;
+    }
+
+    .reveal .hljs-ln-numbers {
+        opacity: 0.6;
+        padding-right: 0.75em;
+        text-align: right;
+        vertical-align: top;
+    }
+
+    .reveal .hljs[data-line-numbers]:not([data-line-numbers=""]) tr:not(.highlight-line) {
+        opacity: 0.4;
+    }
+
+    .reveal .roll {
+        display: inline-block;
+        line-height: 1.2;
+        overflow: hidden;
+        vertical-align: top;
+        -webkit-perspective: 400px;
+        perspective: 400px;
+        -webkit-perspective-origin: 50% 50%;
+        perspective-origin: 50% 50%;
+    }
+
+    .reveal .roll:hover {
+        background: none;
+        text-shadow: none;
+    }
+
+    .reveal .roll span {
+        display: block;
+        position: relative;
+        padding: 0 2px;
+        pointer-events: none;
+        transition: all 400ms ease;
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .reveal .roll:hover span {
+        background: rgba(0, 0, 0, 0.5);
+        -webkit-transform: translate3d(0px, 0px, -45px) rotateX(90deg);
+        transform: translate3d(0px, 0px, -45px) rotateX(90deg);
+    }
+
+    .reveal .roll span:after {
+        content: attr(data-title);
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 0 2px;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+        -webkit-transform: translate3d(0px, 110%, 0px) rotateX(-90deg);
+        transform: translate3d(0px, 110%, 0px) rotateX(-90deg);
+    }
+
+    .reveal aside.notes {
+        display: none;
+    }
+
+    .reveal .speaker-notes {
+        display: none;
+        position: absolute;
+        width: 33.3333333333%;
+        height: 100%;
+        top: 0;
+        left: 100%;
+        padding: 14px 18px 14px 18px;
+        z-index: 1;
+        font-size: 18px;
+        line-height: 1.4;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        color: #222;
+        background-color: #f5f5f5;
+        overflow: auto;
+        box-sizing: border-box;
+        text-align: left;
+        font-family: Helvetica, sans-serif;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .reveal .speaker-notes .notes-placeholder {
+        color: #ccc;
+        font-style: italic;
+    }
+
+    .reveal .speaker-notes:focus {
+        outline: none;
+    }
+
+    .reveal .speaker-notes:before {
+        content: 'Speaker notes';
+        display: block;
+        margin-bottom: 10px;
+        opacity: 0.5;
+    }
+
+    .reveal.show-notes {
+        max-width: 75%;
+        overflow: visible;
+    }
+
+    .reveal.show-notes .speaker-notes {
+        display: block;
+    }
+
+    @media screen and (min-width: 1600px) {
+        .reveal .speaker-notes {
+            font-size: 20px;
+        }
+    }
+
+    @media screen and (max-width: 1024px) {
+        .reveal.show-notes {
+            border-left: 0;
+            max-width: none;
+            max-height: 70%;
+            max-height: 70vh;
+            overflow: visible;
+        }
+
+        .reveal.show-notes .speaker-notes {
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 42.8571428571%;
+            height: 30vh;
+            border: 0;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .reveal.show-notes {
+            max-height: 60%;
+            max-height: 60vh;
+        }
+
+        .reveal.show-notes .speaker-notes {
+            top: 100%;
+            height: 66.6666666667%;
+            height: 40vh;
+        }
+
+        .reveal .speaker-notes {
+            font-size: 14px;
+        }
+    }
+
+    .zoomed .reveal *, .zoomed .reveal *:before, .zoomed .reveal *:after {
+        -webkit-backface-visibility: visible !important;
+        backface-visibility: visible !important;
+    }
+
+    .zoomed .reveal .progress, .zoomed .reveal .controls {
+        opacity: 0;
+    }
+
+    .zoomed .reveal .roll span {
+        background: none;
+    }
+
+    .zoomed .reveal .roll span:after {
+        visibility: hidden;
+    }</style>
+    <style> @font-face {
+        font-family: 'Source Sans Pro';
+        src: url('data:text/html; charset=utf-8;base64,');
+        src: url('data:text/html; charset=utf-8;base64,') format('embedded-opentype'), url('data:text/html; charset=utf-8;base64,') format('woff'), url('data:text/html; charset=utf-8;base64,') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Source Sans Pro';
+        src: url('data:text/html; charset=utf-8;base64,');
+        src: url('data:text/html; charset=utf-8;base64,') format('embedded-opentype'), url('data:text/html; charset=utf-8;base64,') format('woff'), url('data:text/html; charset=utf-8;base64,') format('truetype');
+        font-weight: normal;
+        font-style: italic;
+    }
+
+    @font-face {
+        font-family: 'Source Sans Pro';
+        src: url('data:text/html; charset=utf-8;base64,');
+        src: url('data:text/html; charset=utf-8;base64,') format('embedded-opentype'), url('data:text/html; charset=utf-8;base64,') format('woff'), url('data:text/html; charset=utf-8;base64,') format('truetype');
+        font-weight: 600;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Source Sans Pro';
+        src: url('data:text/html; charset=utf-8;base64,');
+        src: url('data:text/html; charset=utf-8;base64,') format('embedded-opentype'), url('data:text/html; charset=utf-8;base64,') format('woff'), url('data:text/html; charset=utf-8;base64,') format('truetype');
+        font-weight: 600;
+        font-style: italic;
+    }
+
+    section.has-light-background, section.has-light-background h1, section.has-light-background h2, section.has-light-background h3, section.has-light-background h4, section.has-light-background h5, section.has-light-background h6 {
+        color: #222;
+    }
+
+    body {
+        background: #191919;
+        background-color: #191919;
+    }
+
+    .reveal {
+        font-family: "Source Sans Pro", Helvetica, sans-serif;
+        font-size: 42px;
+        font-weight: normal;
+        color: #fff;
+    }
+
+    ::selection {
+        color: #fff;
+        background: #bee4fd;
+        text-shadow: none;
+    }
+
+    ::-moz-selection {
+        color: #fff;
+        background: #bee4fd;
+        text-shadow: none;
+    }
+
+    .reveal .slides section, .reveal .slides section > section {
+        line-height: 1.3;
+        font-weight: inherit;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+        margin: 0 0 20px 0;
+        color: #fff;
+        font-family: "Source Sans Pro", Helvetica, sans-serif;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: normal;
+        text-transform: uppercase;
+        text-shadow: none;
+        word-wrap: break-word;
+    }
+
+    .reveal h1 {
+        font-size: 2.5em;
+    }
+
+    .reveal h2 {
+        font-size: 1.6em;
+    }
+
+    .reveal h3 {
+        font-size: 1.3em;
+    }
+
+    .reveal h4 {
+        font-size: 1em;
+    }
+
+    .reveal h1 {
+        text-shadow: none;
+    }
+
+    .reveal p {
+        margin: 20px 0;
+        line-height: 1.3;
+    }
+
+    .reveal img, .reveal video, .reveal iframe {
+        max-width: 95%;
+        max-height: 95%;
+    }
+
+    .reveal strong, .reveal b {
+        font-weight: bold;
+    }
+
+    .reveal em {
+        font-style: italic;
+    }
+
+    .reveal ol, .reveal dl, .reveal ul {
+        display: inline-block;
+        text-align: left;
+        margin: 0 0 0 1em;
+    }
+
+    .reveal ol {
+        list-style-type: decimal;
+    }
+
+    .reveal ul {
+        list-style-type: disc;
+    }
+
+    .reveal ul ul {
+        list-style-type: square;
+    }
+
+    .reveal ul ul ul {
+        list-style-type: circle;
+    }
+
+    .reveal ul ul, .reveal ul ol, .reveal ol ol, .reveal ol ul {
+        display: block;
+        margin-left: 40px;
+    }
+
+    .reveal dt {
+        font-weight: bold;
+    }
+
+    .reveal dd {
+        margin-left: 40px;
+    }
+
+    .reveal blockquote {
+        display: block;
+        position: relative;
+        width: 70%;
+        margin: 20px auto;
+        padding: 5px;
+        font-style: italic;
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .reveal blockquote p:first-child, .reveal blockquote p:last-child {
+        display: inline-block;
+    }
+
+    .reveal q {
+        font-style: italic;
+    }
+
+    .reveal pre {
+        display: block;
+        position: relative;
+        width: 90%;
+        margin: 20px auto;
+        text-align: left;
+        font-size: 0.55em;
+        font-family: monospace;
+        line-height: 1.2em;
+        word-wrap: break-word;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .reveal code {
+        font-family: monospace;
+        text-transform: none;
+    }
+
+    .reveal pre code {
+        display: block;
+        padding: 5px;
+        overflow: auto;
+        max-height: 400px;
+        word-wrap: normal;
+    }
+
+    .reveal table {
+        margin: auto;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .reveal table th {
+        font-weight: bold;
+    }
+
+    .reveal table th, .reveal table td {
+        text-align: left;
+        padding: 0.2em 0.5em 0.2em 0.5em;
+        border-bottom: 1px solid;
+    }
+
+    .reveal table th[align="center"], .reveal table td[align="center"] {
+        text-align: center;
+    }
+
+    .reveal table th[align="right"], .reveal table td[align="right"] {
+        text-align: right;
+    }
+
+    .reveal table tbody tr:last-child th, .reveal table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .reveal sup {
+        vertical-align: super;
+        font-size: smaller;
+    }
+
+    .reveal sub {
+        vertical-align: sub;
+        font-size: smaller;
+    }
+
+    .reveal small {
+        display: inline-block;
+        font-size: 0.6em;
+        line-height: 1.2em;
+        vertical-align: top;
+    }
+
+    .reveal small * {
+        vertical-align: top;
+    }
+
+    .reveal a {
+        color: #42affa;
+        text-decoration: none;
+        -webkit-transition: color .15s ease;
+        -moz-transition: color .15s ease;
+        transition: color .15s ease;
+    }
+
+    .reveal a:hover {
+        color: #8dcffc;
+        text-shadow: none;
+        border: none;
+    }
+
+    .reveal .roll span:after {
+        color: #fff;
+        background: #068de9;
+    }
+
+    .reveal section img {
+        margin: 15px 0px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 4px solid #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .reveal section img.plain {
+        border: 0;
+        box-shadow: none;
+    }
+
+    .reveal a img {
+        -webkit-transition: all .15s linear;
+        -moz-transition: all .15s linear;
+        transition: all .15s linear;
+    }
+
+    .reveal a:hover img {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: #42affa;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+    }
+
+    .reveal .controls {
+        color: #42affa;
+    }
+
+    .reveal .progress {
+        background: rgba(0, 0, 0, 0.2);
+        color: #42affa;
+    }
+
+    .reveal .progress span {
+        -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+        -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+        transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+    }
+
+    @media print {
+        .backgrounds {
+            background-color: #191919;
+        }
+    }</style>
+    <style> .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        background: #272822;
+        color: #ddd;
+    }
+
+    .hljs-tag, .hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-strong, .hljs-name {
+        color: #f92672;
+    }
+
+    .hljs-code {
+        color: #66d9ef;
+    }
+
+    .hljs-class .hljs-title {
+        color: white;
+    }
+
+    .hljs-attribute, .hljs-symbol, .hljs-regexp, .hljs-link {
+        color: #bf79db;
+    }
+
+    .hljs-string, .hljs-bullet, .hljs-subst, .hljs-title, .hljs-section, .hljs-emphasis, .hljs-type, .hljs-built_in, .hljs-builtin-name, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-addition, .hljs-variable, .hljs-template-tag, .hljs-template-variable {
+        color: #a6e22e;
+    }
+
+    .hljs-comment, .hljs-quote, .hljs-deletion, .hljs-meta {
+        color: #75715e;
+    }
+
+    .hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-doctag, .hljs-title, .hljs-section, .hljs-type, .hljs-selector-id {
+        font-weight: bold;
+    }</style>
+    <script>var link = document.createElement("link");
+    link.rel = "stylesheet", link.type = "text/css", link.href = window.location.search.match(/print-pdf/gi) ? "css/print/pdf.css" : "css/print/paper.css", document.getElementsByTagName("head")[0].appendChild(link);</script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section><h3>Présentations</h3> <a href="src/2019-05-20-dette-technique.html"
+                                           title="Présentation sur la dette technique"> Présentation sur la dette
+            technique </a></section>
+    </div>
+</div>
+<script>!function (e, t) {
+    "function" == typeof define && define.amd ? define(function () {
+        return e.Reveal = t(), e.Reveal
+    }) : "object" == typeof exports ? module.exports = t() : e.Reveal = t()
+}(this, function () {
+    "use strict";
+
+    function e(e) {
+        if (!0 !== ir) if (ir = !0, t(), br.transforms2d || br.transforms3d) {
+            vr.wrapper = document.querySelector(".reveal"), vr.slides = document.querySelector(".reveal .slides"), window.addEventListener("load", X, !1);
+            var n = Vt.getQueryHash();
+            void 0 !== n.dependencies && delete n.dependencies, S(ar, e), S(ar, n), B(), r()
+        } else {
+            document.body.setAttribute("class", "no-transforms");
+            for (var a = x(document.getElementsByTagName("img")), i = x(document.getElementsByTagName("iframe")), o = a.concat(i), s = 0, l = o.length; s < l; s++) {
+                var c = o[s];
+                c.getAttribute("data-src") && (c.setAttribute("src", c.getAttribute("data-src")), c.removeAttribute("data-src"))
+            }
+        }
+    }
+
+    function t() {
+        Jt = /(iphone|ipod|ipad|android)/gi.test(nr), Qt = /chrome/i.test(nr) && !/edge/i.test(nr);
+        var e = document.createElement("div");
+        br.transforms3d = "WebkitPerspective" in e.style || "MozPerspective" in e.style || "msPerspective" in e.style || "OPerspective" in e.style || "perspective" in e.style, br.transforms2d = "WebkitTransform" in e.style || "MozTransform" in e.style || "msTransform" in e.style || "OTransform" in e.style || "transform" in e.style, br.requestAnimationFrameMethod = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame, br.requestAnimationFrame = "function" == typeof br.requestAnimationFrameMethod, br.canvas = !!document.createElement("canvas").getContext, br.overviewTransitions = !/Version\/[\d\.]+.*Safari/.test(nr), br.zoom = "zoom" in e.style && !Jt && (Qt || /Version\/[\d\.]+.*Safari/.test(nr))
+    }
+
+    function r() {
+        var e = [], t = 0;
+        ar.dependencies.forEach(function (t) {
+            t.condition && !t.condition() || (t.async ? mr.push(t) : e.push(t))
+        }), e.length ? (t = e.length, e.forEach(function (e) {
+            i(e.src, function () {
+                "function" == typeof e.callback && e.callback(), 0 == --t && n()
+            })
+        })) : n()
+    }
+
+    function n() {
+        var e = Object.keys(gr).length;
+        if (0 === e) a(); else {
+            var t = function () {
+                0 == --e && a()
+            };
+            for (var r in gr) {
+                var n = gr[r];
+                if ("function" == typeof n.init) {
+                    var i = n.init();
+                    i && "function" == typeof i.then ? i.then(t) : t()
+                } else t()
+            }
+        }
+    }
+
+    function a() {
+        mr.length && mr.forEach(function (e) {
+            i(e.src, e.callback)
+        }), o()
+    }
+
+    function i(e, t) {
+        var r = document.createElement("script");
+        r.type = "text/javascript", r.async = !1, r.defer = !1, r.src = e, t && (r.onload = r.onreadystatechange = function (e) {
+            ("load" === e.type || /loaded|complete/.test(r.readyState)) && (r.onload = r.onreadystatechange = r.onerror = null, t())
+        }, r.onerror = function (e) {
+            r.onload = r.onreadystatechange = r.onerror = null, t(new Error("Failed loading script: " + r.src + "\n" + e))
+        });
+        var n = document.querySelector("head");
+        n.insertBefore(r, n.lastChild)
+    }
+
+    function o() {
+        or = !0, s(), g(), u(), ye(), m(), Ye(), Te(!0), setTimeout(function () {
+            vr.slides.classList.remove("no-transition"), vr.wrapper.classList.add("ready"), D("ready", {
+                indexh: jt,
+                indexv: Yt,
+                currentSlide: _t
+            })
+        }, 1), H() && (y(), "complete" === document.readyState ? d() : window.addEventListener("load", d))
+    }
+
+    function s() {
+        vr.slides.classList.add("no-transition"), Jt ? vr.wrapper.classList.add("no-hover") : vr.wrapper.classList.remove("no-hover"), /iphone/gi.test(nr) ? vr.wrapper.classList.add("ua-iphone") : vr.wrapper.classList.remove("ua-iphone"), vr.background = p(vr.wrapper, "div", "backgrounds", null), vr.progress = p(vr.wrapper, "div", "progress", "<span></span>"), vr.progressbar = vr.progress.querySelector("span"), vr.controls = p(vr.wrapper, "aside", "controls", '<button class="navigate-left" aria-label="previous slide"><div class="controls-arrow"></div></button><button class="navigate-right" aria-label="next slide"><div class="controls-arrow"></div></button><button class="navigate-up" aria-label="above slide"><div class="controls-arrow"></div></button><button class="navigate-down" aria-label="below slide"><div class="controls-arrow"></div></button>'), vr.slideNumber = p(vr.wrapper, "div", "slide-number", ""), vr.speakerNotes = p(vr.wrapper, "div", "speaker-notes", null), vr.speakerNotes.setAttribute("data-prevent-swipe", ""), vr.speakerNotes.setAttribute("tabindex", "0"), vr.pauseOverlay = p(vr.wrapper, "div", "pause-overlay", ar.controls ? '<button class="resume-button">Resume presentation</button>' : null), vr.wrapper.setAttribute("role", "application"), vr.controlsLeft = x(document.querySelectorAll(".navigate-left")), vr.controlsRight = x(document.querySelectorAll(".navigate-right")), vr.controlsUp = x(document.querySelectorAll(".navigate-up")), vr.controlsDown = x(document.querySelectorAll(".navigate-down")), vr.controlsPrev = x(document.querySelectorAll(".navigate-prev")), vr.controlsNext = x(document.querySelectorAll(".navigate-next")), vr.controlsRightArrow = vr.controls.querySelector(".navigate-right"), vr.controlsDownArrow = vr.controls.querySelector(".navigate-down"), vr.statusDiv = l()
+    }
+
+    function l() {
+        var e = document.getElementById("aria-status-div");
+        return e || (e = document.createElement("div"), e.style.position = "absolute", e.style.height = "1px", e.style.width = "1px", e.style.overflow = "hidden", e.style.clip = "rect( 1px, 1px, 1px, 1px )", e.setAttribute("id", "aria-status-div"), e.setAttribute("aria-live", "polite"), e.setAttribute("aria-atomic", "true"), vr.wrapper.appendChild(e)), e
+    }
+
+    function c(e) {
+        var t = "";
+        if (3 === e.nodeType) t += e.textContent; else if (1 === e.nodeType) {
+            var r = e.getAttribute("aria-hidden"), n = "none" === window.getComputedStyle(e).display;
+            "true" === r || n || x(e.childNodes).forEach(function (e) {
+                t += c(e)
+            })
+        }
+        return t
+    }
+
+    function d() {
+        var e = $(window.innerWidth, window.innerHeight), t = Math.floor(e.width * (1 + ar.margin)),
+            r = Math.floor(e.height * (1 + ar.margin)), n = e.width, a = e.height;
+        I("@page{size:" + t + "px " + r + "px; margin: 0px;}"), I(".reveal section>img, .reveal section>video, .reveal section>iframe{max-width: " + n + "px; max-height:" + a + "px}"), document.body.classList.add("print-pdf"), document.body.style.width = t + "px", document.body.style.height = r + "px", _(n, a), x(vr.wrapper.querySelectorAll(er)).forEach(function (e, t) {
+            e.setAttribute("data-index-h", t), e.classList.contains("stack") && x(e.querySelectorAll("section")).forEach(function (e, r) {
+                e.setAttribute("data-index-h", t), e.setAttribute("data-index-v", r)
+            })
+        }), x(vr.wrapper.querySelectorAll(Gt)).forEach(function (e) {
+            if (!1 === e.classList.contains("stack")) {
+                var i = (t - n) / 2, o = (r - a) / 2, s = e.scrollHeight, l = Math.max(Math.ceil(s / r), 1);
+                l = Math.min(l, ar.pdfMaxPagesPerSlide), (1 === l && ar.center || e.classList.contains("center")) && (o = Math.max((r - s) / 2, 0));
+                var c = document.createElement("div");
+                if (c.className = "pdf-page", c.style.height = (r + ar.pdfPageHeightOffset) * l + "px", e.parentNode.insertBefore(c, e), c.appendChild(e), e.style.left = i + "px", e.style.top = o + "px", e.style.width = n + "px", e.slideBackgroundElement && c.insertBefore(e.slideBackgroundElement, e), ar.showNotes) {
+                    var d = et(e);
+                    if (d) {
+                        var u = "string" == typeof ar.showNotes ? ar.showNotes : "inline",
+                            p = document.createElement("div");
+                        p.classList.add("speaker-notes"), p.classList.add("speaker-notes-pdf"), p.setAttribute("data-layout", u), p.innerHTML = d, "separate-page" === u ? c.parentNode.insertBefore(p, c.nextSibling) : (p.style.left = "8px", p.style.bottom = "8px", p.style.width = t - 16 + "px", c.appendChild(p))
+                    }
+                }
+                if (ar.slideNumber && /all|print/i.test(ar.showSlideNumber)) {
+                    var f = parseInt(e.getAttribute("data-index-h"), 10) + 1,
+                        h = parseInt(e.getAttribute("data-index-v"), 10) + 1, v = document.createElement("div");
+                    v.classList.add("slide-number"), v.classList.add("slide-number-pdf"), v.innerHTML = Ne(f, ".", h), c.appendChild(v)
+                }
+                if (ar.pdfSeparateFragments) {
+                    var g, m, b = nt(c.querySelectorAll(".fragment"), !0);
+                    b.forEach(function (e) {
+                        g && g.forEach(function (e) {
+                            e.classList.remove("current-fragment")
+                        }), e.forEach(function (e) {
+                            e.classList.add("visible", "current-fragment")
+                        });
+                        var t = c.cloneNode(!0);
+                        c.parentNode.insertBefore(t, (m || c).nextSibling), g = e, m = t
+                    }), b.forEach(function (e) {
+                        e.forEach(function (e) {
+                            e.classList.remove("visible", "current-fragment")
+                        })
+                    })
+                } else x(c.querySelectorAll(".fragment:not(.fade-out)")).forEach(function (e) {
+                    e.classList.add("visible")
+                })
+            }
+        }), D("pdf-ready")
+    }
+
+    function u() {
+        setInterval(function () {
+            0 === vr.wrapper.scrollTop && 0 === vr.wrapper.scrollLeft || (vr.wrapper.scrollTop = 0, vr.wrapper.scrollLeft = 0)
+        }, 1e3)
+    }
+
+    function p(e, t, r, n) {
+        for (var a = e.querySelectorAll("." + r), i = 0; i < a.length; i++) {
+            var o = a[i];
+            if (o.parentNode === e) return o
+        }
+        var s = document.createElement(t);
+        return s.className = r, "string" == typeof n && (s.innerHTML = n), e.appendChild(s), s
+    }
+
+    function f() {
+        H();
+        vr.background.innerHTML = "", vr.background.classList.add("no-transition"), x(vr.wrapper.querySelectorAll(er)).forEach(function (e) {
+            var t = h(e, vr.background);
+            x(e.querySelectorAll("section")).forEach(function (e) {
+                h(e, t), t.classList.add("stack")
+            })
+        }), ar.parallaxBackgroundImage ? (vr.background.style.backgroundImage = 'url("' + ar.parallaxBackgroundImage + '")', vr.background.style.backgroundSize = ar.parallaxBackgroundSize, vr.background.style.backgroundRepeat = ar.parallaxBackgroundRepeat, vr.background.style.backgroundPosition = ar.parallaxBackgroundPosition, setTimeout(function () {
+            vr.wrapper.classList.add("has-parallax-background")
+        }, 1)) : (vr.background.style.backgroundImage = "", vr.wrapper.classList.remove("has-parallax-background"))
+    }
+
+    function h(e, t) {
+        var r = document.createElement("div");
+        r.className = "slide-background " + e.className.replace(/present|past|future/, "");
+        var n = document.createElement("div");
+        return n.className = "slide-background-content", r.appendChild(n), t.appendChild(r), e.slideBackgroundElement = r, e.slideBackgroundContentElement = n, v(e), r
+    }
+
+    function v(e) {
+        var t = e.slideBackgroundElement, r = e.slideBackgroundContentElement;
+        e.classList.remove("has-dark-background"), e.classList.remove("has-light-background"), t.removeAttribute("data-loaded"), t.removeAttribute("data-background-hash"), t.removeAttribute("data-background-size"), t.removeAttribute("data-background-transition"), t.style.backgroundColor = "", r.style.backgroundSize = "", r.style.backgroundRepeat = "", r.style.backgroundPosition = "", r.style.backgroundImage = "", r.style.opacity = "", r.innerHTML = "";
+        var n = {
+            background: e.getAttribute("data-background"),
+            backgroundSize: e.getAttribute("data-background-size"),
+            backgroundImage: e.getAttribute("data-background-image"),
+            backgroundVideo: e.getAttribute("data-background-video"),
+            backgroundIframe: e.getAttribute("data-background-iframe"),
+            backgroundColor: e.getAttribute("data-background-color"),
+            backgroundRepeat: e.getAttribute("data-background-repeat"),
+            backgroundPosition: e.getAttribute("data-background-position"),
+            backgroundTransition: e.getAttribute("data-background-transition"),
+            backgroundOpacity: e.getAttribute("data-background-opacity")
+        };
+        n.background && (/^(http|file|\/\/)/gi.test(n.background) || /\.(svg|png|jpg|jpeg|gif|bmp)([?#\s]|$)/gi.test(n.background) ? e.setAttribute("data-background-image", n.background) : t.style.background = n.background), (n.background || n.backgroundColor || n.backgroundImage || n.backgroundVideo || n.backgroundIframe) && t.setAttribute("data-background-hash", n.background + n.backgroundSize + n.backgroundImage + n.backgroundVideo + n.backgroundIframe + n.backgroundColor + n.backgroundRepeat + n.backgroundPosition + n.backgroundTransition + n.backgroundOpacity), n.backgroundSize && t.setAttribute("data-background-size", n.backgroundSize), n.backgroundColor && (t.style.backgroundColor = n.backgroundColor), n.backgroundTransition && t.setAttribute("data-background-transition", n.backgroundTransition), n.backgroundSize && (r.style.backgroundSize = n.backgroundSize), n.backgroundRepeat && (r.style.backgroundRepeat = n.backgroundRepeat), n.backgroundPosition && (r.style.backgroundPosition = n.backgroundPosition), n.backgroundOpacity && (r.style.opacity = n.backgroundOpacity);
+        var a = n.backgroundColor;
+        if (!a) {
+            var i = window.getComputedStyle(t);
+            i && i.backgroundColor && (a = i.backgroundColor)
+        }
+        if (a) {
+            var o = P(a);
+            o && 0 !== o.a && (C(a) < 128 ? e.classList.add("has-dark-background") : e.classList.add("has-light-background"))
+        }
+    }
+
+    function g() {
+        ar.postMessage && window.addEventListener("message", function (e) {
+            var t = e.data;
+            "string" == typeof t && "{" === t.charAt(0) && "}" === t.charAt(t.length - 1) && (t = JSON.parse(t), t.method && "function" == typeof Vt[t.method] && Vt[t.method].apply(Vt, t.args))
+        }, !1)
+    }
+
+    function m(e) {
+        var t = ar.transition;
+        if ("object" == typeof e && S(ar, e), !1 !== or) {
+            var r = vr.wrapper.querySelectorAll(Gt).length;
+            vr.wrapper.classList.remove(t), !1 === br.transforms3d && (ar.transition = "linear"), vr.wrapper.classList.add(ar.transition), vr.wrapper.setAttribute("data-transition-speed", ar.transitionSpeed), vr.wrapper.setAttribute("data-background-transition", ar.backgroundTransition), vr.controls.style.display = ar.controls ? "block" : "none", vr.progress.style.display = ar.progress ? "block" : "none", vr.controls.setAttribute("data-controls-layout", ar.controlsLayout), vr.controls.setAttribute("data-controls-back-arrows", ar.controlsBackArrows), ar.shuffle && ke(), ar.rtl ? vr.wrapper.classList.add("rtl") : vr.wrapper.classList.remove("rtl"), ar.center ? vr.wrapper.classList.add("center") : vr.wrapper.classList.remove("center"), !1 === ar.pause && de(), ar.showNotes && vr.speakerNotes.setAttribute("data-layout", "string" == typeof ar.showNotes ? ar.showNotes : "inline"), ar.mouseWheel ? (document.addEventListener("DOMMouseScroll", Nt, !1), document.addEventListener("mousewheel", Nt, !1)) : (document.removeEventListener("DOMMouseScroll", Nt, !1), document.removeEventListener("mousewheel", Nt, !1)), ar.rollingLinks ? O() : W(), ar.hideInactiveCursor ? (document.addEventListener("mousemove", wt, !1), document.addEventListener("mousedown", wt, !1)) : (se(), document.removeEventListener("mousemove", wt, !1), document.removeEventListener("mousedown", wt, !1)), ar.previewLinks ? (F(), U("[data-preview-link=false]")) : (U(), F("[data-preview-link]:not([data-preview-link=false])")), Zt && (Zt.destroy(), Zt = null), r > 1 && ar.autoSlide && ar.autoSlideStoppable && br.canvas && br.requestAnimationFrame && (Zt = new Kt(vr.wrapper, function () {
+                return Math.min(Math.max((Date.now() - xr) / Er, 0), 1)
+            }), Zt.on("click", Ut), qr = !1), !1 === ar.fragments && x(vr.slides.querySelectorAll(".fragment")).forEach(function (e) {
+                e.classList.add("visible"), e.classList.remove("current-fragment")
+            });
+            var n = "none";
+            ar.slideNumber && !H() && ("all" === ar.showSlideNumber ? n = "block" : "speaker" === ar.showSlideNumber && je() && (n = "block")), vr.slideNumber.style.display = n, "default" !== ar.navigationMode ? vr.wrapper.setAttribute("data-navigation-mode", ar.navigationMode) : vr.wrapper.removeAttribute("data-navigation-mode"), "linear" === ar.navigationMode ? (Nr["&#8594;  ,  &#8595;  ,  SPACE  ,  N  ,  L  ,  J"] = "Next slide", Nr["&#8592;  ,  &#8593;  ,  P  ,  H  ,  K"] = "Previous slide") : (Nr["N  ,  SPACE"] = "Next slide", Nr.P = "Previous slide", Nr["&#8592;  ,  H"] = "Navigate left", Nr["&#8594;  ,  L"] = "Navigate right", Nr["&#8593;  ,  K"] = "Navigate up", Nr["&#8595;  ,  J"] = "Navigate down"), Nr["Home  ,  &#8984;/CTRL &#8592;"] = "First slide", Nr["End  ,  &#8984;/CTRL &#8594;"] = "Last slide", Nr["B  ,  ."] = "Pause", Nr.F = "Fullscreen", Nr["ESC, O"] = "Slide overview", ge()
+        }
+    }
+
+    function b() {
+        if (Lr = !0, window.addEventListener("hashchange", zt, !1), window.addEventListener("resize", Dt, !1), ar.touch && ("onpointerdown" in window ? (vr.wrapper.addEventListener("pointerdown", xt, !1), vr.wrapper.addEventListener("pointermove", qt, !1), vr.wrapper.addEventListener("pointerup", Mt, !1)) : window.navigator.msPointerEnabled ? (vr.wrapper.addEventListener("MSPointerDown", xt, !1), vr.wrapper.addEventListener("MSPointerMove", qt, !1), vr.wrapper.addEventListener("MSPointerUp", Mt, !1)) : (vr.wrapper.addEventListener("touchstart", Lt, !1), vr.wrapper.addEventListener("touchmove", Et, !1), vr.wrapper.addEventListener("touchend", St, !1))), ar.keyboard && (document.addEventListener("keydown", At, !1), document.addEventListener("keypress", kt, !1)), ar.progress && vr.progress && vr.progress.addEventListener("click", It, !1), vr.pauseOverlay.addEventListener("click", de, !1), ar.focusBodyOnPageVisibilityChange) {
+            var e;
+            "hidden" in document ? e = "visibilitychange" : "msHidden" in document ? e = "msvisibilitychange" : "webkitHidden" in document && (e = "webkitvisibilitychange"), e && document.addEventListener(e, Ot, !1)
+        }
+        var t = ["touchstart", "click"];
+        nr.match(/android/gi) && (t = ["touchstart"]), t.forEach(function (e) {
+            vr.controlsLeft.forEach(function (t) {
+                t.addEventListener(e, Tt, !1)
+            }), vr.controlsRight.forEach(function (t) {
+                t.addEventListener(e, Pt, !1)
+            }), vr.controlsUp.forEach(function (t) {
+                t.addEventListener(e, Ct, !1)
+            }), vr.controlsDown.forEach(function (t) {
+                t.addEventListener(e, Rt, !1)
+            }), vr.controlsPrev.forEach(function (t) {
+                t.addEventListener(e, Ht, !1)
+            }), vr.controlsNext.forEach(function (t) {
+                t.addEventListener(e, Bt, !1)
+            })
+        })
+    }
+
+    function y() {
+        Lr = !1, document.removeEventListener("keydown", At, !1), document.removeEventListener("keypress", kt, !1), window.removeEventListener("hashchange", zt, !1), window.removeEventListener("resize", Dt, !1), vr.wrapper.removeEventListener("pointerdown", xt, !1), vr.wrapper.removeEventListener("pointermove", qt, !1), vr.wrapper.removeEventListener("pointerup", Mt, !1), vr.wrapper.removeEventListener("MSPointerDown", xt, !1), vr.wrapper.removeEventListener("MSPointerMove", qt, !1), vr.wrapper.removeEventListener("MSPointerUp", Mt, !1), vr.wrapper.removeEventListener("touchstart", Lt, !1), vr.wrapper.removeEventListener("touchmove", Et, !1), vr.wrapper.removeEventListener("touchend", St, !1), vr.pauseOverlay.removeEventListener("click", de, !1), ar.progress && vr.progress && vr.progress.removeEventListener("click", It, !1), ["touchstart", "click"].forEach(function (e) {
+            vr.controlsLeft.forEach(function (t) {
+                t.removeEventListener(e, Tt, !1)
+            }), vr.controlsRight.forEach(function (t) {
+                t.removeEventListener(e, Pt, !1)
+            }), vr.controlsUp.forEach(function (t) {
+                t.removeEventListener(e, Ct, !1)
+            }), vr.controlsDown.forEach(function (t) {
+                t.removeEventListener(e, Rt, !1)
+            }), vr.controlsPrev.forEach(function (t) {
+                t.removeEventListener(e, Ht, !1)
+            }), vr.controlsNext.forEach(function (t) {
+                t.removeEventListener(e, Bt, !1)
+            })
+        })
+    }
+
+    function w(e, t) {
+        void 0 === gr[e] ? (gr[e] = t, or && "function" == typeof t.init && t.init()) : console.warn('reveal.js: "' + e + '" plugin has already been registered')
+    }
+
+    function k(e) {
+        return !!gr[e]
+    }
+
+    function A(e) {
+        return gr[e]
+    }
+
+    function L(e, t) {
+        "object" == typeof e && e.keyCode ? Ir[e.keyCode] = {
+            callback: t,
+            key: e.key,
+            description: e.description
+        } : Ir[e] = {callback: t, key: null, description: null}
+    }
+
+    function E(e) {
+        delete Ir[e]
+    }
+
+    function S(e, t) {
+        for (var r in t) e[r] = t[r];
+        return e
+    }
+
+    function x(e) {
+        return Array.prototype.slice.call(e)
+    }
+
+    function q(e) {
+        if ("string" == typeof e) {
+            if ("null" === e) return null;
+            if ("true" === e) return !0;
+            if ("false" === e) return !1;
+            if (e.match(/^-?[\d\.]+$/)) return parseFloat(e)
+        }
+        return e
+    }
+
+    function M(e, t) {
+        e.style.WebkitTransform = t, e.style.MozTransform = t, e.style.msTransform = t, e.style.transform = t
+    }
+
+    function N(e) {
+        "string" == typeof e.layout && (hr.layout = e.layout), "string" == typeof e.overview && (hr.overview = e.overview), hr.layout ? M(vr.slides, hr.layout + " " + hr.overview) : M(vr.slides, hr.overview)
+    }
+
+    function I(e) {
+        var t = document.createElement("style");
+        t.type = "text/css", t.styleSheet ? t.styleSheet.cssText = e : t.appendChild(document.createTextNode(e)), document.getElementsByTagName("head")[0].appendChild(t)
+    }
+
+    function T(e, t) {
+        for (var r = e.parentNode; r;) {
+            var n = r.matches || r.matchesSelector || r.msMatchesSelector;
+            if (n && n.call(r, t)) return r;
+            r = r.parentNode
+        }
+        return null
+    }
+
+    function P(e) {
+        var t = e.match(/^#([0-9a-f]{3})$/i);
+        if (t && t[1]) return t = t[1], {
+            r: 17 * parseInt(t.charAt(0), 16),
+            g: 17 * parseInt(t.charAt(1), 16),
+            b: 17 * parseInt(t.charAt(2), 16)
+        };
+        var r = e.match(/^#([0-9a-f]{6})$/i);
+        if (r && r[1]) return r = r[1], {
+            r: parseInt(r.substr(0, 2), 16),
+            g: parseInt(r.substr(2, 2), 16),
+            b: parseInt(r.substr(4, 2), 16)
+        };
+        var n = e.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
+        if (n) return {r: parseInt(n[1], 10), g: parseInt(n[2], 10), b: parseInt(n[3], 10)};
+        var a = e.match(/^rgba\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\,\s*([\d]+|[\d]*.[\d]+)\s*\)$/i);
+        return a ? {r: parseInt(a[1], 10), g: parseInt(a[2], 10), b: parseInt(a[3], 10), a: parseFloat(a[4])} : null
+    }
+
+    function C(e) {
+        return "string" == typeof e && (e = P(e)), e ? (299 * e.r + 587 * e.g + 114 * e.b) / 1e3 : null
+    }
+
+    function R(e, t) {
+        if (t = t || 0, e) {
+            var r, n = e.style.height;
+            return e.style.height = "0px", e.parentNode.style.height = "auto", r = t - e.parentNode.offsetHeight, e.style.height = n + "px", e.parentNode.style.removeProperty("height"), r
+        }
+        return t
+    }
+
+    function H() {
+        return /print-pdf/gi.test(window.location.search)
+    }
+
+    function B() {
+        ar.hideAddressBar && Jt && (window.addEventListener("load", z, !1), window.addEventListener("orientationchange", z, !1))
+    }
+
+    function z() {
+        setTimeout(function () {
+            window.scrollTo(0, 1)
+        }, 10)
+    }
+
+    function D(e, t) {
+        var r = document.createEvent("HTMLEvents", 1, 2);
+        r.initEvent(e, !0, !0), S(r, t), vr.wrapper.dispatchEvent(r), ar.postMessageEvents && window.parent !== window.self && window.parent.postMessage(JSON.stringify({
+            namespace: "reveal",
+            eventName: e,
+            state: tt()
+        }), "*")
+    }
+
+    function O() {
+        if (br.transforms3d && !("msPerspective" in document.body.style)) for (var e = vr.wrapper.querySelectorAll(Gt + " a"), t = 0, r = e.length; t < r; t++) {
+            var n = e[t];
+            if (n.textContent && !n.querySelector("*") && (!n.className || !n.classList.contains(n, "roll"))) {
+                var a = document.createElement("span");
+                a.setAttribute("data-title", n.text), a.innerHTML = n.innerHTML, n.classList.add("roll"), n.innerHTML = "", n.appendChild(a)
+            }
+        }
+    }
+
+    function W() {
+        for (var e = vr.wrapper.querySelectorAll(Gt + " a.roll"), t = 0, r = e.length; t < r; t++) {
+            var n = e[t], a = n.querySelector("span");
+            a && (n.classList.remove("roll"), n.innerHTML = a.innerHTML)
+        }
+    }
+
+    function F(e) {
+        x(document.querySelectorAll(e || "a")).forEach(function (e) {
+            /^(http|www)/gi.test(e.getAttribute("href")) && e.addEventListener("click", Ft, !1)
+        })
+    }
+
+    function U(e) {
+        x(document.querySelectorAll(e || "a")).forEach(function (e) {
+            /^(http|www)/gi.test(e.getAttribute("href")) && e.removeEventListener("click", Ft, !1)
+        })
+    }
+
+    function K(e) {
+        Y(), vr.overlay = document.createElement("div"), vr.overlay.classList.add("overlay"), vr.overlay.classList.add("overlay-preview"), vr.wrapper.appendChild(vr.overlay), vr.overlay.innerHTML = ["<header>", '<a class="close" href="#"><span class="icon"></span></a>', '<a class="external" href="' + e + '" target="_blank"><span class="icon"></span></a>', "</header>", '<div class="spinner"></div>', '<div class="viewport">', '<iframe src="' + e + '"></iframe>', '<small class="viewport-inner">', '<span class="x-frame-error">Unable to load iframe. This is likely due to the site\'s policy (x-frame-options).</span>', "</small>", "</div>"].join(""), vr.overlay.querySelector("iframe").addEventListener("load", function (e) {
+            vr.overlay.classList.add("loaded")
+        }, !1), vr.overlay.querySelector(".close").addEventListener("click", function (e) {
+            Y(), e.preventDefault()
+        }, !1), vr.overlay.querySelector(".external").addEventListener("click", function (e) {
+            Y()
+        }, !1), setTimeout(function () {
+            vr.overlay.classList.add("visible")
+        }, 1)
+    }
+
+    function V(e) {
+        "boolean" == typeof e ? e ? j() : Y() : vr.overlay ? Y() : j()
+    }
+
+    function j() {
+        if (ar.help) {
+            Y(), vr.overlay = document.createElement("div"), vr.overlay.classList.add("overlay"), vr.overlay.classList.add("overlay-help"), vr.wrapper.appendChild(vr.overlay);
+            var e = '<p class="title">Keyboard Shortcuts</p><br/>';
+            e += "<table><th>KEY</th><th>ACTION</th>";
+            for (var t in Nr) e += "<tr><td>" + t + "</td><td>" + Nr[t] + "</td></tr>";
+            for (var r in Ir) Ir[r].key && Ir[r].description && (e += "<tr><td>" + Ir[r].key + "</td><td>" + Ir[r].description + "</td></tr>");
+            e += "</table>", vr.overlay.innerHTML = ["<header>", '<a class="close" href="#"><span class="icon"></span></a>', "</header>", '<div class="viewport">', '<div class="viewport-inner">' + e + "</div>", "</div>"].join(""), vr.overlay.querySelector(".close").addEventListener("click", function (e) {
+                Y(), e.preventDefault()
+            }, !1), setTimeout(function () {
+                vr.overlay.classList.add("visible")
+            }, 1)
+        }
+    }
+
+    function Y() {
+        vr.overlay && (vr.overlay.parentNode.removeChild(vr.overlay), vr.overlay = null)
+    }
+
+    function X() {
+        if (vr.wrapper && !H()) {
+            if (!ar.disableLayout) {
+                Jt && document.documentElement.style.setProperty("--vh", .01 * window.innerHeight + "px");
+                var e = $(), t = fr;
+                _(ar.width, ar.height), vr.slides.style.width = e.width + "px", vr.slides.style.height = e.height + "px", fr = Math.min(e.presentationWidth / e.width, e.presentationHeight / e.height), fr = Math.max(fr, ar.minScale), fr = Math.min(fr, ar.maxScale), 1 === fr ? (vr.slides.style.zoom = "", vr.slides.style.left = "", vr.slides.style.top = "", vr.slides.style.bottom = "", vr.slides.style.right = "", N({layout: ""})) : fr > 1 && br.zoom ? (vr.slides.style.zoom = fr, vr.slides.style.left = "", vr.slides.style.top = "", vr.slides.style.bottom = "", vr.slides.style.right = "", N({layout: ""})) : (vr.slides.style.zoom = "", vr.slides.style.left = "50%", vr.slides.style.top = "50%", vr.slides.style.bottom = "auto", vr.slides.style.right = "auto", N({layout: "translate(-50%, -50%) scale(" + fr + ")"}));
+                for (var r = x(vr.wrapper.querySelectorAll(Gt)), n = 0, a = r.length; n < a; n++) {
+                    var i = r[n];
+                    "none" !== i.style.display && (ar.center || i.classList.contains("center") ? i.classList.contains("stack") ? i.style.top = 0 : i.style.top = Math.max((e.height - i.scrollHeight) / 2, 0) + "px" : i.style.top = "")
+                }
+                t !== fr && D("resize", {oldScale: t, scale: fr, size: e})
+            }
+            qe(), Pe(), ne() && ee()
+        }
+    }
+
+    function _(e, t) {
+        x(vr.slides.querySelectorAll("section > .stretch")).forEach(function (r) {
+            var n = R(r, t);
+            if (/(img|video)/gi.test(r.nodeName)) {
+                var a = r.naturalWidth || r.videoWidth, i = r.naturalHeight || r.videoHeight,
+                    o = Math.min(e / a, n / i);
+                r.style.width = a * o + "px", r.style.height = i * o + "px"
+            } else r.style.width = e + "px", r.style.height = n + "px"
+        })
+    }
+
+    function $(e, t) {
+        var r = {
+            width: ar.width,
+            height: ar.height,
+            presentationWidth: e || vr.wrapper.offsetWidth,
+            presentationHeight: t || vr.wrapper.offsetHeight
+        };
+        return r.presentationWidth -= r.presentationWidth * ar.margin, r.presentationHeight -= r.presentationHeight * ar.margin, "string" == typeof r.width && /%$/.test(r.width) && (r.width = parseInt(r.width, 10) / 100 * r.presentationWidth), "string" == typeof r.height && /%$/.test(r.height) && (r.height = parseInt(r.height, 10) / 100 * r.presentationHeight), r
+    }
+
+    function J(e, t) {
+        "object" == typeof e && "function" == typeof e.setAttribute && e.setAttribute("data-previous-indexv", t || 0)
+    }
+
+    function Q(e) {
+        if ("object" == typeof e && "function" == typeof e.setAttribute && e.classList.contains("stack")) {
+            var t = e.hasAttribute("data-start-indexv") ? "data-start-indexv" : "data-previous-indexv";
+            return parseInt(e.getAttribute(t) || 0, 10)
+        }
+        return 0
+    }
+
+    function Z() {
+        if (ar.overview && !ne()) {
+            sr = !0, vr.wrapper.classList.add("overview"), vr.wrapper.classList.remove("overview-deactivating"), br.overviewTransitions && setTimeout(function () {
+                vr.wrapper.classList.add("overview-animated")
+            }, 1), ct(), vr.slides.appendChild(vr.background), x(vr.wrapper.querySelectorAll(Gt)).forEach(function (e) {
+                e.classList.contains("stack") || e.addEventListener("click", Wt, !0)
+            });
+            var e = $();
+            lr = e.width + 70, cr = e.height + 70, ar.rtl && (lr = -lr), Le(), G(), ee(), X(), D("overviewshown", {
+                indexh: jt,
+                indexv: Yt,
+                currentSlide: _t
+            })
+        }
+    }
+
+    function G() {
+        x(vr.wrapper.querySelectorAll(er)).forEach(function (e, t) {
+            e.setAttribute("data-index-h", t), M(e, "translate3d(" + t * lr + "px, 0, 0)"), e.classList.contains("stack") && x(e.querySelectorAll("section")).forEach(function (e, r) {
+                e.setAttribute("data-index-h", t), e.setAttribute("data-index-v", r), M(e, "translate3d(0, " + r * cr + "px, 0)")
+            })
+        }), x(vr.background.childNodes).forEach(function (e, t) {
+            M(e, "translate3d(" + t * lr + "px, 0, 0)"), x(e.querySelectorAll(".slide-background")).forEach(function (e, t) {
+                M(e, "translate3d(0, " + t * cr + "px, 0)")
+            })
+        })
+    }
+
+    function ee() {
+        var e = Math.min(window.innerWidth, window.innerHeight);
+        N({overview: ["scale(" + Math.max(e / 5, 150) / e + ")", "translateX(" + -jt * lr + "px)", "translateY(" + -Yt * cr + "px)"].join(" ")})
+    }
+
+    function te() {
+        ar.overview && (sr = !1, vr.wrapper.classList.remove("overview"), vr.wrapper.classList.remove("overview-animated"), vr.wrapper.classList.add("overview-deactivating"), setTimeout(function () {
+            vr.wrapper.classList.remove("overview-deactivating")
+        }, 1), vr.wrapper.appendChild(vr.background), x(vr.wrapper.querySelectorAll(Gt)).forEach(function (e) {
+            M(e, ""), e.removeEventListener("click", Wt, !0)
+        }), x(vr.background.querySelectorAll(".slide-background")).forEach(function (e) {
+            M(e, "")
+        }), N({overview: ""}), ve(jt, Yt), X(), lt(), D("overviewhidden", {indexh: jt, indexv: Yt, currentSlide: _t}))
+    }
+
+    function re(e) {
+        "boolean" == typeof e ? e ? Z() : te() : ne() ? te() : Z()
+    }
+
+    function ne() {
+        return sr
+    }
+
+    function ae() {
+        var e = "/", t = _t ? _t.getAttribute("id") : null;
+        t && (t = encodeURIComponent(t));
+        var r;
+        if (ar.fragmentInURL && (r = _e().f), "string" == typeof t && t.length && void 0 === r) e = "/" + t; else {
+            var n = ar.hashOneBasedIndex ? 1 : 0;
+            (jt > 0 || Yt > 0 || void 0 !== r) && (e += jt + n), (Yt > 0 || void 0 !== r) && (e += "/" + (Yt + n)), void 0 !== r && (e += "/" + r)
+        }
+        return e
+    }
+
+    function ie(e) {
+        return (e = e || _t) && e.parentNode && !!e.parentNode.nodeName.match(/section/i)
+    }
+
+    function oe() {
+        var e = document.documentElement,
+            t = e.requestFullscreen || e.webkitRequestFullscreen || e.webkitRequestFullScreen || e.mozRequestFullScreen || e.msRequestFullscreen;
+        t && t.apply(e)
+    }
+
+    function se() {
+        kr && (kr = !1, vr.wrapper.style.cursor = "")
+    }
+
+    function le() {
+        !1 === kr && (kr = !0, vr.wrapper.style.cursor = "none")
+    }
+
+    function ce() {
+        if (ar.pause) {
+            var e = vr.wrapper.classList.contains("paused");
+            ct(), vr.wrapper.classList.add("paused"), !1 === e && D("paused")
+        }
+    }
+
+    function de() {
+        var e = vr.wrapper.classList.contains("paused");
+        vr.wrapper.classList.remove("paused"), lt(), e && D("resumed")
+    }
+
+    function ue(e) {
+        "boolean" == typeof e ? e ? ce() : de() : pe() ? de() : ce()
+    }
+
+    function pe() {
+        return vr.wrapper.classList.contains("paused")
+    }
+
+    function fe(e) {
+        "boolean" == typeof e ? e ? ut() : dt() : qr ? ut() : dt()
+    }
+
+    function he() {
+        return !(!Er || qr)
+    }
+
+    function ve(e, t, r, n) {
+        Xt = _t;
+        var a = vr.wrapper.querySelectorAll(er);
+        if (0 !== a.length) {
+            void 0 !== t || ne() || (t = Q(a[e])), Xt && Xt.parentNode && Xt.parentNode.classList.contains("stack") && J(Xt.parentNode, Yt);
+            var i = pr.concat();
+            pr.length = 0;
+            var o = jt || 0, s = Yt || 0;
+            jt = Ae(er, void 0 === e ? jt : e), Yt = Ae(tr, void 0 === t ? Yt : t), Le(), X(), ne() && ee();
+            var l = a[jt], d = l.querySelectorAll("section");
+            _t = d[Yt] || l, void 0 !== r && it(r);
+            var u = jt !== o || Yt !== s;
+            u || (Xt = null), Xt && Xt !== _t && (Xt.classList.remove("present"), Xt.setAttribute("aria-hidden", "true"), vr.wrapper.querySelector(rr).classList.contains("present") && setTimeout(function () {
+                var e, t = x(vr.wrapper.querySelectorAll(er + ".stack"));
+                for (e in t) t[e] && J(t[e], 0)
+            }, 0));
+            e:for (var p = 0, f = pr.length; p < f; p++) {
+                for (var h = 0; h < i.length; h++) if (i[h] === pr[p]) {
+                    i.splice(h, 1);
+                    continue e
+                }
+                document.documentElement.classList.add(pr[p]), D(pr[p])
+            }
+            for (; i.length;) document.documentElement.classList.remove(i.pop());
+            u && D("slidechanged", {
+                indexh: jt,
+                indexv: Yt,
+                previousSlide: Xt,
+                currentSlide: _t,
+                origin: n
+            }), !u && Xt || (Ue(Xt), Oe(_t)), vr.statusDiv.textContent = c(_t), Ie(), qe(), Te(), Pe(), Me(), Ee(), at(), Xe(), lt()
+        }
+    }
+
+    function ge() {
+        y(), b(), X(), Er = ar.autoSlide, lt(), f(), Xe(), we(), Ie(), qe(), Me(), Le(), Te(!0), Se(), Ee(), De(), !1 === ar.autoPlayMedia ? Ue(_t, {unloadIframes: !1}) : Oe(_t), ne() && G()
+    }
+
+    function me(e) {
+        e = e || _t, v(e), be(e), Te(), Ee(), Re(e)
+    }
+
+    function be(e) {
+        return e = e || _t, nt(e.querySelectorAll(".fragment"))
+    }
+
+    function ye() {
+        x(vr.wrapper.querySelectorAll(er)).forEach(function (e) {
+            x(e.querySelectorAll("section")).forEach(function (e, t) {
+                t > 0 && (e.classList.remove("present"), e.classList.remove("past"), e.classList.add("future"), e.setAttribute("aria-hidden", "true"))
+            })
+        })
+    }
+
+    function we() {
+        x(vr.wrapper.querySelectorAll(er)).forEach(function (e) {
+            var t = x(e.querySelectorAll("section"));
+            t.forEach(function (e, t) {
+                nt(e.querySelectorAll(".fragment"))
+            }), 0 === t.length && nt(e.querySelectorAll(".fragment"))
+        })
+    }
+
+    function ke() {
+        var e = x(vr.wrapper.querySelectorAll(er));
+        e.forEach(function (t) {
+            vr.slides.insertBefore(t, e[Math.floor(Math.random() * e.length)])
+        })
+    }
+
+    function Ae(e, t) {
+        var r = x(vr.wrapper.querySelectorAll(e)), n = r.length, a = H();
+        if (n) {
+            ar.loop && (t %= n) < 0 && (t = n + t), t = Math.max(Math.min(t, n - 1), 0);
+            for (var i = 0; i < n; i++) {
+                var o = r[i], s = ar.rtl && !ie(o);
+                o.classList.remove("past"), o.classList.remove("present"), o.classList.remove("future"), o.setAttribute("hidden", ""), o.setAttribute("aria-hidden", "true"), o.querySelector("section") && o.classList.add("stack"), a ? o.classList.add("present") : i < t ? (o.classList.add(s ? "future" : "past"), ar.fragments && x(o.querySelectorAll(".fragment")).forEach(function (e) {
+                    e.classList.add("visible"), e.classList.remove("current-fragment")
+                })) : i > t && (o.classList.add(s ? "past" : "future"), ar.fragments && x(o.querySelectorAll(".fragment.visible")).forEach(function (e) {
+                    e.classList.remove("visible"), e.classList.remove("current-fragment")
+                }))
+            }
+            r[t].classList.add("present"), r[t].removeAttribute("hidden"), r[t].removeAttribute("aria-hidden");
+            var l = r[t].getAttribute("data-state");
+            l && (pr = pr.concat(l.split(" ")))
+        } else t = 0;
+        return t
+    }
+
+    function Le() {
+        var e, t, r = x(vr.wrapper.querySelectorAll(er)), n = r.length;
+        if (n && void 0 !== jt) {
+            var a = ne() ? 10 : ar.viewDistance;
+            Jt && (a = ne() ? 6 : 2), H() && (a = Number.MAX_VALUE);
+            for (var i = 0; i < n; i++) {
+                var o = r[i], s = x(o.querySelectorAll("section")), l = s.length;
+                if (e = Math.abs((jt || 0) - i) || 0, ar.loop && (e = Math.abs(((jt || 0) - i) % (n - a)) || 0), e < a ? Re(o) : He(o), l) for (var c = Q(o), d = 0; d < l; d++) {
+                    var u = s[d];
+                    t = i === (jt || 0) ? Math.abs((Yt || 0) - d) : Math.abs(d - c), e + t < a ? Re(u) : He(u)
+                }
+            }
+            vr.wrapper.querySelectorAll(".slides>section>section").length ? vr.wrapper.classList.add("has-vertical-slides") : vr.wrapper.classList.remove("has-vertical-slides"), vr.wrapper.querySelectorAll(".slides>section").length > 1 ? vr.wrapper.classList.add("has-horizontal-slides") : vr.wrapper.classList.remove("has-horizontal-slides")
+        }
+    }
+
+    function Ee() {
+        ar.showNotes && vr.speakerNotes && _t && !H() && (vr.speakerNotes.innerHTML = et() || '<span class="notes-placeholder">No notes on this slide.</span>')
+    }
+
+    function Se() {
+        ar.showNotes && xe() ? vr.wrapper.classList.add("show-notes") : vr.wrapper.classList.remove("show-notes")
+    }
+
+    function xe() {
+        return vr.slides.querySelectorAll("[data-notes], aside.notes").length > 0
+    }
+
+    function qe() {
+        ar.progress && vr.progressbar && (vr.progressbar.style.width = Ve() * vr.wrapper.offsetWidth + "px")
+    }
+
+    function Me() {
+        if (ar.slideNumber && vr.slideNumber) {
+            var e, t = "h.v";
+            if ("function" == typeof ar.slideNumber) e = ar.slideNumber(); else switch ("string" == typeof ar.slideNumber && (t = ar.slideNumber), /c/.test(t) || 1 !== vr.wrapper.querySelectorAll(er).length || (t = "c"), e = [], t) {
+                case"c":
+                    e.push(Ke() + 1);
+                    break;
+                case"c/t":
+                    e.push(Ke() + 1, "/", Qe());
+                    break;
+                case"h/v":
+                    e.push(jt + 1), ie() && e.push("/", Yt + 1);
+                    break;
+                default:
+                    e.push(jt + 1), ie() && e.push(".", Yt + 1)
+            }
+            vr.slideNumber.innerHTML = Ne(e[0], e[1], e[2])
+        }
+    }
+
+    function Ne(e, t, r) {
+        var n = "#" + ae();
+        return "number" != typeof r || isNaN(r) ? '<a href="' + n + '"><span class="slide-number-a">' + e + "</span></a>" : '<a href="' + n + '"><span class="slide-number-a">' + e + '</span><span class="slide-number-delimiter">' + t + '</span><span class="slide-number-b">' + r + "</span></a>"
+    }
+
+    function Ie() {
+        var e = Be(), t = ze();
+        vr.controlsLeft.concat(vr.controlsRight).concat(vr.controlsUp).concat(vr.controlsDown).concat(vr.controlsPrev).concat(vr.controlsNext).forEach(function (e) {
+            e.classList.remove("enabled"), e.classList.remove("fragmented"), e.setAttribute("disabled", "disabled")
+        }), e.left && vr.controlsLeft.forEach(function (e) {
+            e.classList.add("enabled"), e.removeAttribute("disabled")
+        }), e.right && vr.controlsRight.forEach(function (e) {
+            e.classList.add("enabled"), e.removeAttribute("disabled")
+        }), e.up && vr.controlsUp.forEach(function (e) {
+            e.classList.add("enabled"), e.removeAttribute("disabled")
+        }), e.down && vr.controlsDown.forEach(function (e) {
+            e.classList.add("enabled"), e.removeAttribute("disabled")
+        }), (e.left || e.up) && vr.controlsPrev.forEach(function (e) {
+            e.classList.add("enabled"), e.removeAttribute("disabled")
+        }), (e.right || e.down) && vr.controlsNext.forEach(function (e) {
+            e.classList.add("enabled"), e.removeAttribute("disabled")
+        }), _t && (t.prev && vr.controlsPrev.forEach(function (e) {
+            e.classList.add("fragmented", "enabled"), e.removeAttribute("disabled")
+        }), t.next && vr.controlsNext.forEach(function (e) {
+            e.classList.add("fragmented", "enabled"), e.removeAttribute("disabled")
+        }), ie(_t) ? (t.prev && vr.controlsUp.forEach(function (e) {
+            e.classList.add("fragmented", "enabled"), e.removeAttribute("disabled")
+        }), t.next && vr.controlsDown.forEach(function (e) {
+            e.classList.add("fragmented", "enabled"), e.removeAttribute("disabled")
+        })) : (t.prev && vr.controlsLeft.forEach(function (e) {
+            e.classList.add("fragmented", "enabled"), e.removeAttribute("disabled")
+        }), t.next && vr.controlsRight.forEach(function (e) {
+            e.classList.add("fragmented", "enabled"), e.removeAttribute("disabled")
+        }))), ar.controlsTutorial && (!ur && e.down ? vr.controlsDownArrow.classList.add("highlight") : (vr.controlsDownArrow.classList.remove("highlight"), !dr && e.right && 0 === Yt ? vr.controlsRightArrow.classList.add("highlight") : vr.controlsRightArrow.classList.remove("highlight")))
+    }
+
+    function Te(e) {
+        var t = null, r = ar.rtl ? "future" : "past", n = ar.rtl ? "past" : "future";
+        if (x(vr.background.childNodes).forEach(function (a, i) {
+            a.classList.remove("past"), a.classList.remove("present"), a.classList.remove("future"), i < jt ? a.classList.add(r) : i > jt ? a.classList.add(n) : (a.classList.add("present"), t = a), (e || i === jt) && x(a.querySelectorAll(".slide-background")).forEach(function (e, r) {
+                e.classList.remove("past"), e.classList.remove("present"), e.classList.remove("future"), r < Yt ? e.classList.add("past") : r > Yt ? e.classList.add("future") : (e.classList.add("present"), i === jt && (t = e))
+            })
+        }), $t && Ue($t), t) {
+            Oe(t);
+            var a = t.querySelector(".slide-background-content");
+            if (a) {
+                var i = a.style.backgroundImage || "";
+                /\.gif/i.test(i) && (a.style.backgroundImage = "", window.getComputedStyle(a).opacity, a.style.backgroundImage = i)
+            }
+            var o = $t ? $t.getAttribute("data-background-hash") : null, s = t.getAttribute("data-background-hash");
+            s && s === o && t !== $t && vr.background.classList.add("no-transition"), $t = t
+        }
+        _t && ["has-light-background", "has-dark-background"].forEach(function (e) {
+            _t.classList.contains(e) ? vr.wrapper.classList.add(e) : vr.wrapper.classList.remove(e)
+        }), setTimeout(function () {
+            vr.background.classList.remove("no-transition")
+        }, 1)
+    }
+
+    function Pe() {
+        if (ar.parallaxBackgroundImage) {
+            var e, t, r = vr.wrapper.querySelectorAll(er), n = vr.wrapper.querySelectorAll(tr),
+                a = vr.background.style.backgroundSize.split(" ");
+            1 === a.length ? e = t = parseInt(a[0], 10) : (e = parseInt(a[0], 10), t = parseInt(a[1], 10));
+            var i, o, s = vr.background.offsetWidth, l = r.length;
+            i = "number" == typeof ar.parallaxBackgroundHorizontal ? ar.parallaxBackgroundHorizontal : l > 1 ? (e - s) / (l - 1) : 0, o = i * jt * -1;
+            var c, d, u = vr.background.offsetHeight, p = n.length;
+            c = "number" == typeof ar.parallaxBackgroundVertical ? ar.parallaxBackgroundVertical : (t - u) / (p - 1), d = p > 0 ? c * Yt : 0, vr.background.style.backgroundPosition = o + "px " + -d + "px"
+        }
+    }
+
+    function Ce(e) {
+        var t = ar.preloadIframes;
+        return "boolean" != typeof t && (t = e.hasAttribute("data-preload")), t
+    }
+
+    function Re(e, t) {
+        t = t || {}, e.style.display = ar.display, x(e.querySelectorAll("img[data-src], video[data-src], audio[data-src], iframe[data-src]")).forEach(function (e) {
+            ("IFRAME" !== e.tagName || Ce(e)) && (e.setAttribute("src", e.getAttribute("data-src")), e.setAttribute("data-lazy-loaded", ""), e.removeAttribute("data-src"))
+        }), x(e.querySelectorAll("video, audio")).forEach(function (e) {
+            var t = 0;
+            x(e.querySelectorAll("source[data-src]")).forEach(function (e) {
+                e.setAttribute("src", e.getAttribute("data-src")), e.removeAttribute("data-src"), e.setAttribute("data-lazy-loaded", ""), t += 1
+            }), t > 0 && e.load()
+        });
+        var r = e.slideBackgroundElement;
+        if (r) {
+            r.style.display = "block";
+            var n = e.slideBackgroundContentElement;
+            if (!1 === r.hasAttribute("data-loaded")) {
+                r.setAttribute("data-loaded", "true");
+                var a = e.getAttribute("data-background-image"), i = e.getAttribute("data-background-video"),
+                    o = e.hasAttribute("data-background-video-loop"), s = e.hasAttribute("data-background-video-muted"),
+                    l = e.getAttribute("data-background-iframe");
+                if (a) n.style.backgroundImage = "url(" + encodeURI(a) + ")"; else if (i && !je()) {
+                    var c = document.createElement("video");
+                    o && c.setAttribute("loop", ""), s && (c.muted = !0), Jt && (c.muted = !0, c.autoplay = !0, c.setAttribute("playsinline", "")), i.split(",").forEach(function (e) {
+                        c.innerHTML += '<source src="' + e + '">'
+                    }), n.appendChild(c)
+                } else if (l && !0 !== t.excludeIframes) {
+                    var d = document.createElement("iframe");
+                    d.setAttribute("allowfullscreen", ""), d.setAttribute("mozallowfullscreen", ""), d.setAttribute("webkitallowfullscreen", ""), /autoplay=(1|true|yes)/gi.test(l) ? d.setAttribute("data-src", l) : d.setAttribute("src", l), d.style.width = "100%", d.style.height = "100%", d.style.maxHeight = "100%", d.style.maxWidth = "100%", n.appendChild(d)
+                }
+            }
+        }
+    }
+
+    function He(e) {
+        e.style.display = "none";
+        var t = Ge(e);
+        t && (t.style.display = "none"), x(e.querySelectorAll("video[data-lazy-loaded][src], audio[data-lazy-loaded][src], iframe[data-lazy-loaded][src]")).forEach(function (e) {
+            e.setAttribute("data-src", e.getAttribute("src")), e.removeAttribute("src")
+        }), x(e.querySelectorAll("video[data-lazy-loaded] source[src], audio source[src]")).forEach(function (e) {
+            e.setAttribute("data-src", e.getAttribute("src")), e.removeAttribute("src")
+        })
+    }
+
+    function Be() {
+        var e = vr.wrapper.querySelectorAll(er), t = vr.wrapper.querySelectorAll(tr),
+            r = {left: jt > 0, right: jt < e.length - 1, up: Yt > 0, down: Yt < t.length - 1};
+        if (ar.loop && (e.length > 1 && (r.left = !0, r.right = !0), t.length > 1 && (r.up = !0, r.down = !0)), ar.rtl) {
+            var n = r.left;
+            r.left = r.right, r.right = n
+        }
+        return r
+    }
+
+    function ze() {
+        if (_t && ar.fragments) {
+            var e = _t.querySelectorAll(".fragment"), t = _t.querySelectorAll(".fragment:not(.visible)");
+            return {prev: e.length - t.length > 0, next: !!t.length}
+        }
+        return {prev: !1, next: !1}
+    }
+
+    function De() {
+        var e = function (e, t, r) {
+            x(vr.slides.querySelectorAll("iframe[" + e + '*="' + t + '"]')).forEach(function (t) {
+                var n = t.getAttribute(e);
+                n && -1 === n.indexOf(r) && t.setAttribute(e, n + (/\?/.test(n) ? "&" : "?") + r)
+            })
+        };
+        e("src", "youtube.com/embed/", "enablejsapi=1"), e("data-src", "youtube.com/embed/", "enablejsapi=1"), e("src", "player.vimeo.com/", "api=1"), e("data-src", "player.vimeo.com/", "api=1")
+    }
+
+    function Oe(e) {
+        e && !je() && (x(e.querySelectorAll('img[src$=".gif"]')).forEach(function (e) {
+            e.setAttribute("src", e.getAttribute("src"))
+        }), x(e.querySelectorAll("video, audio")).forEach(function (e) {
+            if (!T(e, ".fragment") || T(e, ".fragment.visible")) {
+                var t = ar.autoPlayMedia;
+                if ("boolean" != typeof t && (t = e.hasAttribute("data-autoplay") || !!T(e, ".slide-background")), t && "function" == typeof e.play) if (e.readyState > 1) We({target: e}); else if (Jt) {
+                    var r = e.play();
+                    r && "function" == typeof r.catch && !1 === e.controls && r.catch(function () {
+                        e.controls = !0, e.addEventListener("play", function () {
+                            e.controls = !1
+                        })
+                    })
+                } else e.removeEventListener("loadeddata", We), e.addEventListener("loadeddata", We)
+            }
+        }), x(e.querySelectorAll("iframe[src]")).forEach(function (e) {
+            T(e, ".fragment") && !T(e, ".fragment.visible") || Fe({target: e})
+        }), x(e.querySelectorAll("iframe[data-src]")).forEach(function (e) {
+            T(e, ".fragment") && !T(e, ".fragment.visible") || e.getAttribute("src") !== e.getAttribute("data-src") && (e.removeEventListener("load", Fe), e.addEventListener("load", Fe), e.setAttribute("src", e.getAttribute("data-src")))
+        }))
+    }
+
+    function We(e) {
+        var t = !!T(e.target, "html"), r = !!T(e.target, ".present");
+        t && r && (e.target.currentTime = 0, e.target.play()), e.target.removeEventListener("loadeddata", We)
+    }
+
+    function Fe(e) {
+        var t = e.target;
+        if (t && t.contentWindow) {
+            var r = !!T(e.target, "html"), n = !!T(e.target, ".present");
+            if (r && n) {
+                var a = ar.autoPlayMedia;
+                "boolean" != typeof a && (a = t.hasAttribute("data-autoplay") || !!T(t, ".slide-background")), /youtube\.com\/embed\//.test(t.getAttribute("src")) && a ? t.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', "*") : /player\.vimeo\.com\//.test(t.getAttribute("src")) && a ? t.contentWindow.postMessage('{"method":"play"}', "*") : t.contentWindow.postMessage("slide:start", "*")
+            }
+        }
+    }
+
+    function Ue(e, t) {
+        t = S({unloadIframes: !0}, t || {}), e && e.parentNode && (x(e.querySelectorAll("video, audio")).forEach(function (e) {
+            e.hasAttribute("data-ignore") || "function" != typeof e.pause || (e.setAttribute("data-paused-by-reveal", ""), e.pause())
+        }), x(e.querySelectorAll("iframe")).forEach(function (e) {
+            e.contentWindow && e.contentWindow.postMessage("slide:stop", "*"), e.removeEventListener("load", Fe)
+        }), x(e.querySelectorAll('iframe[src*="youtube.com/embed/"]')).forEach(function (e) {
+            !e.hasAttribute("data-ignore") && e.contentWindow && "function" == typeof e.contentWindow.postMessage && e.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*")
+        }), x(e.querySelectorAll('iframe[src*="player.vimeo.com/"]')).forEach(function (e) {
+            !e.hasAttribute("data-ignore") && e.contentWindow && "function" == typeof e.contentWindow.postMessage && e.contentWindow.postMessage('{"method":"pause"}', "*")
+        }), !0 === t.unloadIframes && x(e.querySelectorAll("iframe[data-src]")).forEach(function (e) {
+            e.setAttribute("src", "about:blank"), e.removeAttribute("src")
+        }))
+    }
+
+    function Ke() {
+        var e = x(vr.wrapper.querySelectorAll(er)), t = 0;
+        e:for (var r = 0; r < e.length; r++) {
+            for (var n = e[r], a = x(n.querySelectorAll("section")), i = 0; i < a.length; i++) {
+                if (a[i].classList.contains("present")) break e;
+                t++
+            }
+            if (n.classList.contains("present")) break;
+            !1 === n.classList.contains("stack") && t++
+        }
+        return t
+    }
+
+    function Ve() {
+        var e = Qe(), t = Ke();
+        if (_t) {
+            var r = _t.querySelectorAll(".fragment");
+            if (r.length > 0) {
+                t += _t.querySelectorAll(".fragment.visible").length / r.length * .9
+            }
+        }
+        return Math.min(t / (e - 1), 1)
+    }
+
+    function je() {
+        return !!window.location.search.match(/receiver/gi)
+    }
+
+    function Ye() {
+        var e = window.location.hash, t = e.slice(2).split("/"), r = e.replace(/#|\//gi, "");
+        if (!/^[0-9]*$/.test(t[0]) && r.length) {
+            var n;
+            try {
+                n = document.getElementById(decodeURIComponent(r))
+            } catch (e) {
+            }
+            var a = !!_t && _t.getAttribute("id") === r;
+            if (n) {
+                if (!a) {
+                    var i = Vt.getIndices(n);
+                    ve(i.h, i.v)
+                }
+            } else ve(jt || 0, Yt || 0)
+        } else {
+            var o, s = ar.hashOneBasedIndex ? 1 : 0, l = parseInt(t[0], 10) - s || 0, c = parseInt(t[1], 10) - s || 0;
+            ar.fragmentInURL && (o = parseInt(t[2], 10), isNaN(o) && (o = void 0)), l === jt && c === Yt && void 0 === o || ve(l, c, o)
+        }
+    }
+
+    function Xe(e) {
+        clearTimeout(wr), "number" == typeof e ? wr = setTimeout(Xe, e) : _t && (ar.history || !window.history ? window.location.hash = ae() : ar.hash ? window.history.replaceState(null, null, "#" + ae()) : window.history.replaceState(null, null, window.location.pathname + window.location.search))
+    }
+
+    function _e(e) {
+        var t, r = jt, n = Yt;
+        if (e) {
+            var a = ie(e), i = a ? e.parentNode : e, o = x(vr.wrapper.querySelectorAll(er));
+            r = Math.max(o.indexOf(i), 0), n = void 0, a && (n = Math.max(x(e.parentNode.querySelectorAll("section")).indexOf(e), 0))
+        }
+        if (!e && _t) {
+            if (_t.querySelectorAll(".fragment").length > 0) {
+                var s = _t.querySelector(".current-fragment");
+                t = s && s.hasAttribute("data-fragment-index") ? parseInt(s.getAttribute("data-fragment-index"), 10) : _t.querySelectorAll(".fragment.visible").length - 1
+            }
+        }
+        return {h: r, v: n, f: t}
+    }
+
+    function $e() {
+        return x(vr.wrapper.querySelectorAll(Gt + ":not(.stack)"))
+    }
+
+    function Je() {
+        return $e().map(function (e) {
+            for (var t = {}, r = 0; r < e.attributes.length; r++) {
+                var n = e.attributes[r];
+                t[n.name] = n.value
+            }
+            return t
+        })
+    }
+
+    function Qe() {
+        return $e().length
+    }
+
+    function Ze(e, t) {
+        var r = vr.wrapper.querySelectorAll(er)[e], n = r && r.querySelectorAll("section");
+        return n && n.length && "number" == typeof t ? n ? n[t] : void 0 : r
+    }
+
+    function Ge(e, t) {
+        var r = "number" == typeof e ? Ze(e, t) : e;
+        if (r) return r.slideBackgroundElement
+    }
+
+    function et(e) {
+        if (e = e || _t, e.hasAttribute("data-notes")) return e.getAttribute("data-notes");
+        var t = e.querySelector("aside.notes");
+        return t ? t.innerHTML : null
+    }
+
+    function tt() {
+        var e = _e();
+        return {indexh: e.h, indexv: e.v, indexf: e.f, paused: pe(), overview: ne()}
+    }
+
+    function rt(e) {
+        if ("object" == typeof e) {
+            ve(q(e.indexh), q(e.indexv), q(e.indexf));
+            var t = q(e.paused), r = q(e.overview);
+            "boolean" == typeof t && t !== pe() && ue(t), "boolean" == typeof r && r !== ne() && re(r)
+        }
+    }
+
+    function nt(e, t) {
+        e = x(e);
+        var r = [], n = [], a = [];
+        e.forEach(function (e, t) {
+            if (e.hasAttribute("data-fragment-index")) {
+                var a = parseInt(e.getAttribute("data-fragment-index"), 10);
+                r[a] || (r[a] = []), r[a].push(e)
+            } else n.push([e])
+        }), r = r.concat(n);
+        var i = 0;
+        return r.forEach(function (e) {
+            e.forEach(function (e) {
+                a.push(e), e.setAttribute("data-fragment-index", i)
+            }), i++
+        }), !0 === t ? r : a
+    }
+
+    function at(e, t) {
+        var r = {shown: [], hidden: []};
+        if (_t && ar.fragments && (t = t || nt(_t.querySelectorAll(".fragment")), t.length)) {
+            if ("number" != typeof e) {
+                var n = nt(_t.querySelectorAll(".fragment.visible")).pop();
+                n && (e = parseInt(n.getAttribute("data-fragment-index") || 0, 10))
+            }
+            x(t).forEach(function (t, n) {
+                t.hasAttribute("data-fragment-index") && (n = parseInt(t.getAttribute("data-fragment-index"), 10)), n <= e ? (t.classList.contains("visible") || r.shown.push(t), t.classList.add("visible"), t.classList.remove("current-fragment"), vr.statusDiv.textContent = c(t), n === e && (t.classList.add("current-fragment"), Oe(t))) : (t.classList.contains("visible") && r.hidden.push(t), t.classList.remove("visible"), t.classList.remove("current-fragment"))
+            })
+        }
+        return r
+    }
+
+    function it(e, t) {
+        if (_t && ar.fragments) {
+            var r = nt(_t.querySelectorAll(".fragment"));
+            if (r.length) {
+                if ("number" != typeof e) {
+                    var n = nt(_t.querySelectorAll(".fragment.visible")).pop();
+                    e = n ? parseInt(n.getAttribute("data-fragment-index") || 0, 10) : -1
+                }
+                "number" == typeof t && (e += t);
+                var a = at(e, r);
+                return a.hidden.length && D("fragmenthidden", {
+                    fragment: a.hidden[0],
+                    fragments: a.hidden
+                }), a.shown.length && D("fragmentshown", {
+                    fragment: a.shown[0],
+                    fragments: a.shown
+                }), Ie(), qe(), ar.fragmentInURL && Xe(), !(!a.shown.length && !a.hidden.length)
+            }
+        }
+        return !1
+    }
+
+    function ot() {
+        return it(null, 1)
+    }
+
+    function st() {
+        return it(null, -1)
+    }
+
+    function lt() {
+        if (ct(), _t && !1 !== ar.autoSlide) {
+            var e = _t.querySelector(".current-fragment");
+            e || (e = _t.querySelector(".fragment"));
+            var t = e ? e.getAttribute("data-autoslide") : null,
+                r = _t.parentNode ? _t.parentNode.getAttribute("data-autoslide") : null,
+                n = _t.getAttribute("data-autoslide");
+            Er = t ? parseInt(t, 10) : n ? parseInt(n, 10) : r ? parseInt(r, 10) : ar.autoSlide, 0 === _t.querySelectorAll(".fragment").length && x(_t.querySelectorAll("video, audio")).forEach(function (e) {
+                e.hasAttribute("data-autoplay") && Er && 1e3 * e.duration / e.playbackRate > Er && (Er = 1e3 * e.duration / e.playbackRate + 1e3)
+            }), !Er || qr || pe() || ne() || Vt.isLastSlide() && !ze().next && !0 !== ar.loop || (Sr = setTimeout(function () {
+                "function" == typeof ar.autoSlideMethod ? ar.autoSlideMethod() : mt(), lt()
+            }, Er), xr = Date.now()), Zt && Zt.setPlaying(-1 !== Sr)
+        }
+    }
+
+    function ct() {
+        clearTimeout(Sr), Sr = -1
+    }
+
+    function dt() {
+        Er && !qr && (qr = !0, D("autoslidepaused"), clearTimeout(Sr), Zt && Zt.setPlaying(!1))
+    }
+
+    function ut() {
+        Er && qr && (qr = !1, D("autoslideresumed"), lt())
+    }
+
+    function pt() {
+        ar.rtl ? (ne() || !1 === ot()) && Be().left && ve(jt + 1, "grid" === ar.navigationMode ? Yt : void 0) : (ne() || !1 === st()) && Be().left && ve(jt - 1, "grid" === ar.navigationMode ? Yt : void 0)
+    }
+
+    function ft() {
+        dr = !0, ar.rtl ? (ne() || !1 === st()) && Be().right && ve(jt - 1, "grid" === ar.navigationMode ? Yt : void 0) : (ne() || !1 === ot()) && Be().right && ve(jt + 1, "grid" === ar.navigationMode ? Yt : void 0)
+    }
+
+    function ht() {
+        (ne() || !1 === st()) && Be().up && ve(jt, Yt - 1)
+    }
+
+    function vt() {
+        ur = !0, (ne() || !1 === ot()) && Be().down && ve(jt, Yt + 1)
+    }
+
+    function gt() {
+        if (!1 === st()) if (Be().up) ht(); else {
+            var e;
+            if (e = ar.rtl ? x(vr.wrapper.querySelectorAll(er + ".future")).pop() : x(vr.wrapper.querySelectorAll(er + ".past")).pop()) {
+                var t = e.querySelectorAll("section").length - 1 || void 0, r = jt - 1;
+                ve(r, t)
+            }
+        }
+    }
+
+    function mt() {
+        if (dr = !0, ur = !0, !1 === ot()) {
+            var e = Be();
+            e.down && e.right && ar.loop && Vt.isLastVerticalSlide(_t) && (e.down = !1), e.down ? vt() : ar.rtl ? pt() : ft()
+        }
+    }
+
+    function bt(e) {
+        for (; e && "function" == typeof e.hasAttribute;) {
+            if (e.hasAttribute("data-prevent-swipe")) return !0;
+            e = e.parentNode
+        }
+        return !1
+    }
+
+    function yt(e) {
+        ar.autoSlideStoppable && dt()
+    }
+
+    function wt(e) {
+        se(), clearTimeout(Ar), Ar = setTimeout(le, ar.hideCursorTime)
+    }
+
+    function kt(e) {
+        e.shiftKey && 63 === e.charCode && V()
+    }
+
+    function At(e) {
+        if ("function" == typeof ar.keyboardCondition && !1 === ar.keyboardCondition(e)) return !0;
+        var t = e.keyCode, r = qr;
+        yt(e);
+        var n = document.activeElement && "inherit" !== document.activeElement.contentEditable,
+            a = document.activeElement && document.activeElement.tagName && /input|textarea/i.test(document.activeElement.tagName),
+            i = document.activeElement && document.activeElement.className && /speaker-notes/i.test(document.activeElement.className),
+            o = e.shiftKey && 32 === e.keyCode, s = (e.metaKey || e.ctrlKey) && 37 === t,
+            l = (e.metaKey || e.ctrlKey) && 39 === t,
+            c = !o && !s && !l && (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey);
+        if (!(n || a || i || c)) {
+            var d, u = [66, 86, 190, 191];
+            if ("object" == typeof ar.keyboard) for (d in ar.keyboard) "togglePause" === ar.keyboard[d] && u.push(parseInt(d, 10));
+            if (pe() && -1 === u.indexOf(t)) return !1;
+            var p = !1;
+            if ("object" == typeof ar.keyboard) for (d in ar.keyboard) if (parseInt(d, 10) === t) {
+                var f = ar.keyboard[d];
+                "function" == typeof f ? f.apply(null, [e]) : "string" == typeof f && "function" == typeof Vt[f] && Vt[f].call(), p = !0
+            }
+            if (!1 === p) for (d in Ir) if (parseInt(d, 10) === t) {
+                var h = Ir[d].callback;
+                "function" == typeof h ? h.apply(null, [e]) : "string" == typeof h && "function" == typeof Vt[h] && Vt[h].call(), p = !0
+            }
+            !1 === p && (p = !0, 80 === t || 33 === t ? gt() : 78 === t || 34 === t ? mt() : 72 === t || 37 === t ? s ? ve(0) : ne() || "linear" !== ar.navigationMode ? pt() : gt() : 76 === t || 39 === t ? l ? ve(Number.MAX_VALUE) : ne() || "linear" !== ar.navigationMode ? ft() : mt() : 75 === t || 38 === t ? ne() || "linear" !== ar.navigationMode ? ht() : gt() : 74 === t || 40 === t ? ne() || "linear" !== ar.navigationMode ? vt() : mt() : 36 === t ? ve(0) : 35 === t ? ve(Number.MAX_VALUE) : 32 === t ? (ne() && te(), e.shiftKey ? gt() : mt()) : 58 === t || 59 === t || 66 === t || 86 === t || 190 === t || 191 === t ? ue() : 70 === t ? oe() : 65 === t ? ar.autoSlideStoppable && fe(r) : p = !1), p ? e.preventDefault && e.preventDefault() : 27 !== t && 79 !== t || !br.transforms3d || (vr.overlay ? Y() : re(), e.preventDefault && e.preventDefault()), lt()
+        }
+    }
+
+    function Lt(e) {
+        if (bt(e.target)) return !0;
+        Mr.startX = e.touches[0].clientX, Mr.startY = e.touches[0].clientY, Mr.startCount = e.touches.length
+    }
+
+    function Et(e) {
+        if (bt(e.target)) return !0;
+        if (Mr.captured) nr.match(/android/gi) && e.preventDefault(); else {
+            yt(e);
+            var t = e.touches[0].clientX, r = e.touches[0].clientY;
+            if (1 === e.touches.length && 2 !== Mr.startCount) {
+                var n = t - Mr.startX, a = r - Mr.startY;
+                n > Mr.threshold && Math.abs(n) > Math.abs(a) ? (Mr.captured = !0, pt()) : n < -Mr.threshold && Math.abs(n) > Math.abs(a) ? (Mr.captured = !0, ft()) : a > Mr.threshold ? (Mr.captured = !0, ht()) : a < -Mr.threshold && (Mr.captured = !0, vt()), ar.embedded ? (Mr.captured || ie(_t)) && e.preventDefault() : e.preventDefault()
+            }
+        }
+    }
+
+    function St(e) {
+        Mr.captured = !1
+    }
+
+    function xt(e) {
+        e.pointerType !== e.MSPOINTER_TYPE_TOUCH && "touch" !== e.pointerType || (e.touches = [{
+            clientX: e.clientX,
+            clientY: e.clientY
+        }], Lt(e))
+    }
+
+    function qt(e) {
+        e.pointerType !== e.MSPOINTER_TYPE_TOUCH && "touch" !== e.pointerType || (e.touches = [{
+            clientX: e.clientX,
+            clientY: e.clientY
+        }], Et(e))
+    }
+
+    function Mt(e) {
+        e.pointerType !== e.MSPOINTER_TYPE_TOUCH && "touch" !== e.pointerType || (e.touches = [{
+            clientX: e.clientX,
+            clientY: e.clientY
+        }], St(e))
+    }
+
+    function Nt(e) {
+        if (Date.now() - yr > 600) {
+            yr = Date.now();
+            var t = e.detail || -e.wheelDelta;
+            t > 0 ? mt() : t < 0 && gt()
+        }
+    }
+
+    function It(e) {
+        yt(e), e.preventDefault();
+        var t = x(vr.wrapper.querySelectorAll(er)).length, r = Math.floor(e.clientX / vr.wrapper.offsetWidth * t);
+        ar.rtl && (r = t - r), ve(r)
+    }
+
+    function Tt(e) {
+        e.preventDefault(), yt(), "linear" === ar.navigationMode ? gt() : pt()
+    }
+
+    function Pt(e) {
+        e.preventDefault(), yt(), "linear" === ar.navigationMode ? mt() : ft()
+    }
+
+    function Ct(e) {
+        e.preventDefault(), yt(), ht()
+    }
+
+    function Rt(e) {
+        e.preventDefault(), yt(), vt()
+    }
+
+    function Ht(e) {
+        e.preventDefault(), yt(), gt()
+    }
+
+    function Bt(e) {
+        e.preventDefault(), yt(), mt()
+    }
+
+    function zt(e) {
+        Ye()
+    }
+
+    function Dt(e) {
+        X()
+    }
+
+    function Ot(e) {
+        !1 === (document.webkitHidden || document.msHidden || document.hidden) && document.activeElement !== document.body && ("function" == typeof document.activeElement.blur && document.activeElement.blur(), document.body.focus())
+    }
+
+    function Wt(e) {
+        if (Lr && ne()) {
+            e.preventDefault();
+            for (var t = e.target; t && !t.nodeName.match(/section/gi);) t = t.parentNode;
+            if (t && !t.classList.contains("disabled") && (te(), t.nodeName.match(/section/gi))) {
+                ve(parseInt(t.getAttribute("data-index-h"), 10), parseInt(t.getAttribute("data-index-v"), 10))
+            }
+        }
+    }
+
+    function Ft(e) {
+        if (e.currentTarget && e.currentTarget.hasAttribute("href")) {
+            var t = e.currentTarget.getAttribute("href");
+            t && (K(t), e.preventDefault())
+        }
+    }
+
+    function Ut(e) {
+        Vt.isLastSlide() && !1 === ar.loop ? (ve(0, 0), ut()) : qr ? ut() : dt()
+    }
+
+    function Kt(e, t) {
+        this.diameter = 100, this.diameter2 = this.diameter / 2, this.thickness = 6, this.playing = !1, this.progress = 0, this.progressOffset = 1, this.container = e, this.progressCheck = t, this.canvas = document.createElement("canvas"), this.canvas.className = "playback", this.canvas.width = this.diameter, this.canvas.height = this.diameter, this.canvas.style.width = this.diameter2 + "px", this.canvas.style.height = this.diameter2 + "px", this.context = this.canvas.getContext("2d"), this.container.appendChild(this.canvas), this.render()
+    }
+
+    var Vt, jt, Yt, Xt, _t, $t, Jt, Qt, Zt, Gt = ".slides section", er = ".slides>section",
+        tr = ".slides>section.present>section", rr = ".slides>section:first-of-type", nr = navigator.userAgent, ar = {
+            width: 960,
+            height: 700,
+            margin: .04,
+            minScale: .2,
+            maxScale: 2,
+            controls: !0,
+            controlsTutorial: !0,
+            controlsLayout: "bottom-right",
+            controlsBackArrows: "faded",
+            progress: !0,
+            slideNumber: !1,
+            showSlideNumber: "all",
+            hashOneBasedIndex: !1,
+            hash: !1,
+            history: !1,
+            keyboard: !0,
+            keyboardCondition: null,
+            overview: !0,
+            disableLayout: !1,
+            center: !0,
+            touch: !0,
+            loop: !1,
+            rtl: !1,
+            navigationMode: "default",
+            shuffle: !1,
+            fragments: !0,
+            fragmentInURL: !1,
+            embedded: !1,
+            help: !0,
+            pause: !0,
+            showNotes: !1,
+            autoPlayMedia: null,
+            preloadIframes: null,
+            autoSlide: 0,
+            autoSlideStoppable: !0,
+            autoSlideMethod: null,
+            defaultTiming: null,
+            mouseWheel: !1,
+            rollingLinks: !1,
+            hideAddressBar: !0,
+            previewLinks: !1,
+            postMessage: !0,
+            postMessageEvents: !1,
+            focusBodyOnPageVisibilityChange: !0,
+            transition: "slide",
+            transitionSpeed: "default",
+            backgroundTransition: "fade",
+            parallaxBackgroundImage: "",
+            parallaxBackgroundSize: "",
+            parallaxBackgroundRepeat: "",
+            parallaxBackgroundPosition: "",
+            parallaxBackgroundHorizontal: null,
+            parallaxBackgroundVertical: null,
+            pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+            pdfSeparateFragments: !0,
+            pdfPageHeightOffset: -1,
+            viewDistance: 3,
+            display: "block",
+            hideInactiveCursor: !0,
+            hideCursorTime: 5e3,
+            dependencies: []
+        }, ir = !1, or = !1, sr = !1, lr = null, cr = null, dr = !1, ur = !1, pr = [], fr = 1,
+        hr = {layout: "", overview: ""}, vr = {}, gr = {}, mr = [], br = {}, yr = 0, wr = 0, kr = !1, Ar = 0, Lr = !1,
+        Er = 0, Sr = 0, xr = -1, qr = !1, Mr = {startX: 0, startY: 0, startCount: 0, captured: !1, threshold: 40},
+        Nr = {}, Ir = {};
+    return Kt.prototype.setPlaying = function (e) {
+        var t = this.playing;
+        this.playing = e, !t && this.playing ? this.animate() : this.render()
+    }, Kt.prototype.animate = function () {
+        var e = this.progress;
+        this.progress = this.progressCheck(), e > .8 && this.progress < .2 && (this.progressOffset = this.progress), this.render(), this.playing && br.requestAnimationFrameMethod.call(window, this.animate.bind(this))
+    }, Kt.prototype.render = function () {
+        var e = this.playing ? this.progress : 0, t = this.diameter2 - this.thickness, r = this.diameter2,
+            n = this.diameter2;
+        this.progressOffset += .1 * (1 - this.progressOffset);
+        var a = -Math.PI / 2 + e * (2 * Math.PI), i = -Math.PI / 2 + this.progressOffset * (2 * Math.PI);
+        this.context.save(), this.context.clearRect(0, 0, this.diameter, this.diameter), this.context.beginPath(), this.context.arc(r, n, t + 4, 0, 2 * Math.PI, !1), this.context.fillStyle = "rgba( 0, 0, 0, 0.4 )", this.context.fill(), this.context.beginPath(), this.context.arc(r, n, t, 0, 2 * Math.PI, !1), this.context.lineWidth = this.thickness, this.context.strokeStyle = "rgba( 255, 255, 255, 0.2 )", this.context.stroke(), this.playing && (this.context.beginPath(), this.context.arc(r, n, t, i, a, !1), this.context.lineWidth = this.thickness, this.context.strokeStyle = "#fff", this.context.stroke()), this.context.translate(r - 14, n - 14), this.playing ? (this.context.fillStyle = "#fff", this.context.fillRect(0, 0, 10, 28), this.context.fillRect(18, 0, 10, 28)) : (this.context.beginPath(), this.context.translate(4, 0), this.context.moveTo(0, 0), this.context.lineTo(24, 14), this.context.lineTo(0, 28), this.context.fillStyle = "#fff", this.context.fill()), this.context.restore()
+    }, Kt.prototype.on = function (e, t) {
+        this.canvas.addEventListener(e, t, !1)
+    }, Kt.prototype.off = function (e, t) {
+        this.canvas.removeEventListener(e, t, !1)
+    }, Kt.prototype.destroy = function () {
+        this.playing = !1, this.canvas.parentNode && this.container.removeChild(this.canvas)
+    }, Vt = {
+        VERSION: "3.8.0",
+        initialize: e,
+        configure: m,
+        sync: ge,
+        syncSlide: me,
+        syncFragments: be,
+        slide: ve,
+        left: pt,
+        right: ft,
+        up: ht,
+        down: vt,
+        prev: gt,
+        next: mt,
+        navigateFragment: it,
+        prevFragment: st,
+        nextFragment: ot,
+        navigateTo: ve,
+        navigateLeft: pt,
+        navigateRight: ft,
+        navigateUp: ht,
+        navigateDown: vt,
+        navigatePrev: gt,
+        navigateNext: mt,
+        layout: X,
+        shuffle: ke,
+        availableRoutes: Be,
+        availableFragments: ze,
+        toggleHelp: V,
+        toggleOverview: re,
+        togglePause: ue,
+        toggleAutoSlide: fe,
+        isOverview: ne,
+        isPaused: pe,
+        isAutoSliding: he,
+        isSpeakerNotes: je,
+        loadSlide: Re,
+        unloadSlide: He,
+        addEventListeners: b,
+        removeEventListeners: y,
+        getState: tt,
+        setState: rt,
+        getSlidePastCount: Ke,
+        getProgress: Ve,
+        getIndices: _e,
+        getSlides: $e,
+        getSlidesAttributes: Je,
+        getTotalSlides: Qe,
+        getSlide: Ze,
+        getSlideBackground: Ge,
+        getSlideNotes: et,
+        getPreviousSlide: function () {
+            return Xt
+        },
+        getCurrentSlide: function () {
+            return _t
+        },
+        getScale: function () {
+            return fr
+        },
+        getConfig: function () {
+            return ar
+        },
+        getQueryHash: function () {
+            var e = {};
+            location.search.replace(/[A-Z0-9]+?=([\w\.%-]*)/gi, function (t) {
+                e[t.split("=").shift()] = t.split("=").pop()
+            });
+            for (var t in e) {
+                var r = e[t];
+                e[t] = q(unescape(r))
+            }
+            return e
+        },
+        getRevealElement: function () {
+            return vr.wrapper || document.querySelector(".reveal")
+        },
+        getPlugins: function () {
+            return gr
+        },
+        isFirstSlide: function () {
+            return 0 === jt && 0 === Yt
+        },
+        isLastSlide: function () {
+            return !!_t && (!_t.nextElementSibling && (!ie(_t) || !_t.parentNode.nextElementSibling))
+        },
+        isLastVerticalSlide: function () {
+            return !(!_t || !ie(_t)) && !_t.nextElementSibling
+        },
+        isReady: function () {
+            return or
+        },
+        addEventListener: function (e, t, r) {
+            "addEventListener" in window && Vt.getRevealElement().addEventListener(e, t, r)
+        },
+        removeEventListener: function (e, t, r) {
+            "addEventListener" in window && Vt.getRevealElement().removeEventListener(e, t, r)
+        },
+        addKeyBinding: L,
+        removeKeyBinding: E,
+        registerPlugin: w,
+        hasPlugin: k,
+        getPlugin: A,
+        triggerKey: function (e) {
+            At({keyCode: e})
+        },
+        registerKeyboardShortcut: function (e, t) {
+            Nr[e] = t
+        }
+    }
+});</script>
+<script>Reveal.initialize({dependencies: [{src: "plugin/highlight/highlight.js", async: !0}]});</script>
+</body>
+</html>
