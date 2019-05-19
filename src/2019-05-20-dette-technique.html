@@ -2286,36 +2286,6 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
             </script>
         </section>
 
-        
-        <section data-markdown>
-            <script type="text/template">
-                - Item 1 <!-- .element: class="fragment" data-fragment-index="1" -->
-                - Item 2 <!-- .element: class="fragment" data-fragment-index="2" -->
-                - ![this is a shihtzu](https://b.thumbs.redditmedia.com/hxbZ3WC7T2RQ4MEuJVI59IU9sjVsKr-q-xYqJ8eRQaA.png) <!-- .element: class="fragment" data-fragment-index="3" -->
-            </script>
-        </section>
-
-        
-        <section data-markdown>
-            <script type="text/template">
-                ```php
-                public function foo()
-                {
-                    $foo = array(
-                    'bar' => 'bar'
-                    );
-                }
-                ```
-            </script>
-        </section>
-
-        
-        <section data-markdown>
-            <script type="text/template">
-                ![Sample image](https://s3.amazonaws.com/static.slid.es/logo/v2/slides-symbol-512x512.png)
-            </script>
-        </section>
-
     </div>
 </div>
 
@@ -8361,10 +8331,22 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 
         // Optional libraries used to extend on reveal.js
         dependencies: [
-            { src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-            { src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-            { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-            { src: '../plugin/notes/notes.js' }
+            {
+                src: '../plugin/markdown/marked.js', condition: function () {
+                    return !!document.querySelector('[data-markdown]');
+                }
+            },
+            {
+                src: '../plugin/markdown/markdown.js', condition: function () {
+                    return !!document.querySelector('[data-markdown]');
+                }
+            },
+            {
+                src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            },
+            {src: '../plugin/notes/notes.js'}
         ]
     });
 
