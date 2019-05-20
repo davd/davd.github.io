@@ -1699,6 +1699,8 @@ section.has-light-background h6 {
     height: 2em; }
   .ant.reveal img.img_auto {
     height: auto; }
+  .ant.reveal img.img_big {
+    margin-top: -2em; }
 
 /*********************************************
  * GLOBAL STYLES
@@ -2066,14 +2068,14 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
                 --
 
                 <!-- .slide: class="template-purple" -->
-                ## Antadis ![Sample image](https://www.antadis.com/templates/antadis/images/logo_big.png) <!-- .element: class="img_small" -->
+                ## Antadis ![antadis logo](https://www.antadis.com/templates/antadis/images/logo_big.png) <!-- .element: class="img_small" -->
                 - Agence indépendante
                 - Spécialiste du E-commerce
                 - Sur Rambouillet / Paris / La Rochelle + télétravail
 
-                ![Sample image](https://www.antadis.com/templates/antadis/images/cms-prestashop.png) <!-- .element: class="img_auto" -->
-                ![Sample image](https://www.antadis.com/templates/antadis/images/logo_proximis.png) <!-- .element: class="img_auto" -->
-                ![Sample image](https://www.antadis.com/templates/antadis/images/cms-magento.png) <!-- .element: class="img_auto" -->
+                ![prestashop](https://www.antadis.com/templates/antadis/images/cms-prestashop.png) <!-- .element: class="img_auto" -->
+                ![proximis](https://www.antadis.com/templates/antadis/images/logo_proximis.png) <!-- .element: class="img_auto" -->
+                ![magento](https://www.antadis.com/templates/antadis/images/cms-magento.png) <!-- .element: class="img_auto" -->
 
 
                 ---
@@ -2081,6 +2083,11 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
                 ## La dette
                 - On emprunte et on créé plus rapidement quelquechose impossible sans cet emprunt <!-- .element: class="fragment" data-fragment-index="1" -->
                 - On rembourse alors avec des intérets <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                ---
+
+                <!-- .slide: class="template-grey" -->
+                ![dette technique](/src/assets/graphique_1.png) <!-- .element: class="img_auto img_big" -->
 
             </script>
         </section>
@@ -2199,7 +2206,7 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 
                 Solutions d'analyse de code pour certains framework
 
-                https://insight.symfony.com
+                https://github.com/phpstan/phpstan + https://www.phpmetrics.org/ + https://insight.symfony.com
 
                 Solutions de monitoring
 
@@ -2283,6 +2290,36 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
                 - Il faut vivre avec
                 - Communiquer
                 - KISS
+            </script>
+        </section>
+
+        
+        <section data-markdown>
+            <script type="text/template">
+                - Item 1 <!-- .element: class="fragment" data-fragment-index="1" -->
+                - Item 2 <!-- .element: class="fragment" data-fragment-index="2" -->
+                - ![this is a shihtzu](https://b.thumbs.redditmedia.com/hxbZ3WC7T2RQ4MEuJVI59IU9sjVsKr-q-xYqJ8eRQaA.png) <!-- .element: class="fragment" data-fragment-index="3" -->
+            </script>
+        </section>
+
+        
+        <section data-markdown>
+            <script type="text/template">
+                ```php
+                public function foo()
+                {
+                    $foo = array(
+                    'bar' => 'bar'
+                    );
+                }
+                ```
+            </script>
+        </section>
+
+        
+        <section data-markdown>
+            <script type="text/template">
+                ![Sample image](https://s3.amazonaws.com/static.slid.es/logo/v2/slides-symbol-512x512.png)
             </script>
         </section>
 
@@ -8331,22 +8368,10 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 
         // Optional libraries used to extend on reveal.js
         dependencies: [
-            {
-                src: '../plugin/markdown/marked.js', condition: function () {
-                    return !!document.querySelector('[data-markdown]');
-                }
-            },
-            {
-                src: '../plugin/markdown/markdown.js', condition: function () {
-                    return !!document.querySelector('[data-markdown]');
-                }
-            },
-            {
-                src: '../plugin/highlight/highlight.js', async: true, callback: function () {
-                    hljs.initHighlightingOnLoad();
-                }
-            },
-            {src: '../plugin/notes/notes.js'}
+            { src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: '../plugin/notes/notes.js' }
         ]
     });
 
