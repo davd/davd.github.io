@@ -1667,6 +1667,9 @@ section.has-light-background h6 {
   text-align: left;
   margin: 0 0 0 0.2em; }
 
+.ant.reveal .text-smaller {
+  font-size: 0.7em; }
+
 .ant.reveal h2 {
   text-transform: none; }
 
@@ -2062,15 +2065,15 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
                 <!-- .slide: class="template-purple" -->
                 ## David Teston
                 - Dev
-                - Php, JS, Python
-                - Depuis 8 ans dans l'E-commerce
+                - PHP, JS, Python
+                - Depuis 8 ans dans l'e-commerce
 
                 --
 
                 <!-- .slide: class="template-purple" -->
                 ## Antadis ![antadis logo](https://www.antadis.com/templates/antadis/images/logo_big.png) <!-- .element: class="img_small" -->
                 - Agence indépendante
-                - Spécialiste du E-commerce
+                - Spécialiste du e-commerce
                 - Sur Rambouillet / Paris / La Rochelle + télétravail
 
                 ![prestashop](https://www.antadis.com/templates/antadis/images/cms-prestashop.png) <!-- .element: class="img_auto" -->
@@ -2081,13 +2084,18 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
                 ---
 
                 ## La dette
-                - On emprunte et on créé plus rapidement quelquechose impossible sans cet emprunt <!-- .element: class="fragment" data-fragment-index="1" -->
-                - On rembourse alors avec des intérets <!-- .element: class="fragment" data-fragment-index="2" -->
+                - On emprunte et on créé plus rapidement quelque chose d'impossible sans cet emprunt <!-- .element: class="fragment" data-fragment-index="1" -->
+                - On remboursera alors avec des intérêts <!-- .element: class="fragment" data-fragment-index="2" -->
 
                 ---
 
                 <!-- .slide: class="template-grey" -->
                 ![dette technique](/src/assets/graphique_1.png) <!-- .element: class="img_auto img_big" -->
+
+                Note:
+                Explication courbe orange
+
+                Le ROI diminue au fur et à mesure du projet sur chaque changement
 
             </script>
         </section>
@@ -2102,14 +2110,14 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 
                 <!-- .slide: class="template-grey" -->
                 ### Dette involontaire
-                Dûe au manque de connaissance métier ou technique <!-- .element: class="text-align-left" -->
+                Due au manque de connaissance métier ou technique <!-- .element: class="text-align-left" -->
                 - Mauvais choix techniques <!-- .element: class="fragment arrow" data-fragment-index="1" -->
                 - Ajout de fonctionnalités incohérentes <!-- .element: class="fragment arrow" data-fragment-index="2" -->
 
                 Note:
                 Implémentations ratées
 
-                Mauvais Couplages (ex : facturation ligne comptable ineffaçable couplsée avec un produit/service qui est efface ou change de nom)
+                Mauvais Couplages (ex : facturation ligne comptable ineffaçable couplée avec un produit/service qui est efface ou change de nom)
 
                 --
 
@@ -2122,7 +2130,7 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
                 Note:
                 Angular 1
 
-                Tout choix de framework implique des limitations et/ou demandera de redevelopper un truc en parallèle.
+                Tout choix de framework implique des limitations et/ou demandera de redévelopper un truc en parallèle.
 
                 --
 
@@ -2164,7 +2172,7 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
                 --
 
                 <!-- .slide: class="template-grey" -->
-                ### Lse projet devient problématique à l'échelle de l'organisation <!-- .element: class="text-align-left" -->
+                ### Le projet devient problématique à l'échelle de l'organisation <!-- .element: class="text-align-left" -->
                 - Burn out / Bore out des équipes (technique/support/infra/clients) <!-- .element: class="fragment" data-fragment-index="1" -->
                 - Le projet se repose alors sur les seuls gens connaissant le code <!-- .element: class="fragment" data-fragment-index="2" -->
 
@@ -2190,14 +2198,13 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 
                 <!-- .slide: class="template-grey" -->
                 ### Autour du code - Le projet est neuf <!-- .element: class="text-align-left" -->
-                - Tester <!-- .element: class="fragment" data-fragment-index="0" -->
-                - Mesurer <!-- .element: class="fragment" data-fragment-index="1" -->
-                - Analyser le code automatiquement <!-- .element: class="fragment" data-fragment-index="2" -->
-                - Documenter l'installation (docker / README.md) <!-- .element: class="fragment" data-fragment-index="3" -->
-                - Automatiser les déploiements <!-- .element: class="fragment" data-fragment-index="4" -->
-                - Debugger facilement le code <!-- .element: class="fragment" data-fragment-index="5" -->
+                - Tester, Mesurer, Analyser <!-- .element: class="fragment" data-fragment-index="0" -->
+                - Construire en suivant les recommandations des frameworks <!-- .element: class="fragment" data-fragment-index="1" -->
+                - Documenter (docker-compose / README.md) <!-- .element: class="fragment" data-fragment-index="2" -->
+                - Automatiser les déploiements <!-- .element: class="fragment" data-fragment-index="3" -->
+                - Pouvoir debugger facilement <!-- .element: class="fragment" data-fragment-index="4" -->
 
-                En bref, on enlève un maximum de pression  <!-- .element: class="fragment" data-fragment-index="6" -->
+                En bref, on enlève un maximum de pression  <!-- .element: class="fragment" data-fragment-index="5" -->
 
                 Note:
                 Framework de test
@@ -2220,6 +2227,8 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 
                 Tous les langages offrent des solutions de debug
 
+                Architecture
+
                 --
 
                 <!-- .slide: class="template-grey" -->
@@ -2227,7 +2236,6 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
                 - On découpe les choses <!-- .element: class="fragment" data-fragment-index="0" -->
                 - On réécrit <!-- .element: class="fragment" data-fragment-index="1" -->
                 - On retire du projet tout ce qui est accessoire <!-- .element: class="fragment" data-fragment-index="2" -->
-                - On réécrit tout en parallèle <!-- .element: class="fragment" data-fragment-index="3" -->
 
                 Note:
                 Découpage : logistique, facturation, analytics, outils marketings, gestion des images etc
@@ -2249,7 +2257,7 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
                 <!-- .slide: class="template-grey" -->
                 ## Équipe technique <!-- .element: class="text-align-left" -->
                 - Partager, Ecouter <!-- .element: class="fragment" data-fragment-index="1" -->
-                - Faire du perprogramming <!-- .element: class="fragment" data-fragment-index="2" -->
+                - Faire du pair programming <!-- .element: class="fragment" data-fragment-index="2" -->
                 - Faire des points réguliers <!-- .element: class="fragment" data-fragment-index="3" -->
                 - Faire la balance entre générique et spécifique <!-- .element: class="fragment" data-fragment-index="4" -->
 
@@ -2257,7 +2265,7 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 
                 <!-- .slide: class="template-grey" -->
                 ## Technique <-> Métier <!-- .element: class="text-align-left" -->
-                - Travailler en accord et pas en exécutant <!-- .element: class="fragment" data-fragment-index="1" -->
+                - La technique n'est pas un simple exécutant du métier <!-- .element: class="fragment" data-fragment-index="1" -->
                 - Être pragmatique, analyser et trouver le vrai besoin ensemble <!-- .element: class="fragment" data-fragment-index="2" -->
                 - Accepter que la technique soit aussi force de proposition <!-- .element: class="fragment" data-fragment-index="3" -->
                 - Négocier ensemble sur des dettes évidentes qu'il faudra rembourser ensuite <!-- .element: class="fragment" data-fragment-index="4" -->
@@ -2274,9 +2282,11 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
                 Note:
 
 
-                Le remboursement le plus efficace peut etre de tout refaire de zéro.
+                Le remboursement le plus efficace peut être de tout refaire de zéro.
 
                 Une application découplée se remplace plus facilement.
+
+                Utiliser des outils SaaS pour les choses qui ne sont pas necessaires au produit.
 
 
             </script>
@@ -2289,10 +2299,30 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
                 ## Conclusion
                 - Il faut vivre avec
                 - Communiquer
-                - KISS
+                - Principe KISS
+
             </script>
         </section>
 
+        
+        <section data-markdown>
+            <script type="text/template">
+                <!-- .slide: class="template-grey" -->
+                ## Liens pour approfondir
+
+                - La dette technique par Bastien Jaillot (FR) <!-- .element: class="text-smaller" -->
+
+                [LIEN](https://boutique.letrainde13h37.fr/products/la-dette-technique-bastien-jaillot) <!-- .element: class="text-smaller" -->
+
+                - Vidéo assez longue d'Arnaud Lemaire (FR) [1h30] <!-- .element: class="text-smaller" -->
+
+                [LIEN](https://www.youtube.com/watch?v=VKe9EE4MUxk) <!-- .element: class="text-smaller" -->
+
+                - Design pattern éprouvés Principe SOLID (EN) <!-- .element: class="text-smaller" -->
+
+                [LIEN](https://raygun.com/blog/solid-design-principles/) <!-- .element: class="text-smaller" -->
+            </script>
+        </section>
 
     </div>
 </div>
